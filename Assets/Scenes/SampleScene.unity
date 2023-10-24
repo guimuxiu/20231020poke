@@ -1217,8 +1217,9 @@ GameObject:
   - component: {fileID: 214294368}
   - component: {fileID: 214294370}
   - component: {fileID: 214294369}
+  - component: {fileID: 214294371}
   m_Layer: 5
-  m_Name: WeaponPlayer01
+  m_Name: UIWeapon01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1288,6 +1289,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214294367}
   m_CullTransparentMesh: 1
+--- !u!114 &214294371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214294367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8050f619027a641b005e720c104bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UImessage: {fileID: 0}
+  UIchoice01: {fileID: 0}
+  UIchoice02: {fileID: 0}
+  UIweapon01: {fileID: 0}
+  UIweapon02: {fileID: 0}
 --- !u!1 &225017880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,6 +1668,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263581718}
   m_CullTransparentMesh: 1
+--- !u!1 &268804540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 268804542}
+  - component: {fileID: 268804541}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &268804541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268804540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8050f619027a641b005e720c104bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UImessage: {fileID: 1355602928}
+  UIchoice01: {fileID: 1559675789}
+  UIchoice02: {fileID: 1659309801}
+  UIweapon01: {fileID: 214294367}
+  UIweapon02: {fileID: 2146385180}
+--- !u!4 &268804542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268804540}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 925.97363, y: 533.9527, z: 5.340187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &270738538
 GameObject:
   m_ObjectHideFlags: 0
@@ -5095,7 +5162,7 @@ GameObject:
   - component: {fileID: 1260810471}
   - component: {fileID: 1260810470}
   m_Layer: 5
-  m_Name: PanelMainBattle
+  m_Name: UImessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5656,7 +5723,7 @@ GameObject:
   - component: {fileID: 1355602931}
   - component: {fileID: 1355602930}
   m_Layer: 5
-  m_Name: TextMainBattle
+  m_Name: textUImessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5715,7 +5782,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6226\u95D8\u3092\u958B\u59CB\u3059\u308B!\n2\u884C\u76EE\n3\u884C\u76EE\n4\u884C\u76EE\n5\u884C\u76EE"
+  m_Text: 
 --- !u!222 &1355602931
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6177,8 +6244,9 @@ GameObject:
   - component: {fileID: 1559675790}
   - component: {fileID: 1559675792}
   - component: {fileID: 1559675791}
+  - component: {fileID: 1559675793}
   m_Layer: 5
-  m_Name: CommandPlayer01
+  m_Name: UIchoice01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6245,6 +6313,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559675789}
   m_CullTransparentMesh: 1
+--- !u!114 &1559675793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559675789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8050f619027a641b005e720c104bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UImessage: {fileID: 0}
+  UIchoice01: {fileID: 0}
+  UIchoice02: {fileID: 0}
+  UIweapon01: {fileID: 0}
+  UIweapon02: {fileID: 0}
 --- !u!1 &1589345170
 GameObject:
   m_ObjectHideFlags: 0
@@ -6699,7 +6784,7 @@ GameObject:
   - component: {fileID: 1659309804}
   - component: {fileID: 1659309803}
   m_Layer: 5
-  m_Name: CommandPlayer02
+  m_Name: UIchoice02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7659,7 +7744,7 @@ GameObject:
   - component: {fileID: 1841624409}
   - component: {fileID: 1841624408}
   m_Layer: 5
-  m_Name: CanvasBattle
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8364,7 +8449,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2044475277}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2044475277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8696,6 +8793,7 @@ GameObject:
   - component: {fileID: 2084269474}
   - component: {fileID: 2084269476}
   - component: {fileID: 2084269475}
+  - component: {fileID: 2084269477}
   m_Layer: 5
   m_Name: ChangePlayer01
   m_TagString: Untagged
@@ -8771,6 +8869,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084269473}
   m_CullTransparentMesh: 1
+--- !u!114 &2084269477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084269473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8050f619027a641b005e720c104bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UImessage: {fileID: 0}
+  UIchoice01: {fileID: 0}
+  UIchoice02: {fileID: 0}
+  UIweapon01: {fileID: 0}
+  UIweapon02: {fileID: 0}
 --- !u!1 &2134543025
 GameObject:
   m_ObjectHideFlags: 0
@@ -8851,7 +8966,7 @@ GameObject:
   - component: {fileID: 2146385183}
   - component: {fileID: 2146385182}
   m_Layer: 5
-  m_Name: WeaponPlayer02
+  m_Name: UIWeapon02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
