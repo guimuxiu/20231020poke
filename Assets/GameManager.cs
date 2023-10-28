@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 //UI•”•i
@@ -63,8 +64,7 @@ public class GameManager : MonoBehaviour
     void Start()
    {
 
-       float d12 = Mathf.Ceil(23 * 1.5f - 0.5f);
-        Debug.Log("ÀŒ±’l" + d12);
+      
 
     }
     // Update is called once per frame
@@ -458,9 +458,134 @@ public class GameManager : MonoBehaviour
             Debug.Log("UŒ‚or“ÁU‚ÌÀ”’l"+da02);
             Debug.Log("“ÁUor“Á–h‚ÌÀ”’l" + da03);
 
+            //UŒ‚‘¤ƒ‰ƒ“ƒN•â³
+            float da201 = 1;
+
+            if(player01.AtRa ==0) { da201 = 1; }
+            else if( player01.AtRa == 1) { da201 = 3 / 2; }
+            else if (player01.AtRa == 2) { da201 = 4 / 2; }
+            else if (player01.AtRa == 3) { da201 = 5 / 2; }
+            else if (player01.AtRa == 4) { da201 = 6 / 2; }
+            else if (player01.AtRa == 5) { da201 = 7 / 2; }
+            else if (player01.AtRa == 6) { da201 = 8 / 2; }
+            else if (player01.AtRa == -1) { da201 = 2 / 3; }
+            else if (player01.AtRa == -2) { da201 = 2 / 4; }
+            else if (player01.AtRa == -3) { da201 = 2 / 5; }
+            else if (player01.AtRa == -4) { da201 = 2 / 6; }
+            else if (player01.AtRa == -5) { da201 = 2 / 7; }
+            else if (player01.AtRa == -6) { da201 = 2 / 8; }
+            else { Debug.Log(" Aƒ‰ƒ“ƒNŒvZ¸”s"); }
+
+            float da203 = 1;
+
+            if (player01.CtRa == 0) { da203 = 1; }
+            else if (player01.CtRa == 1) { da203 = 3 / 2; }
+            else if (player01.CtRa == 2) { da203 = 4 / 2; }
+            else if (player01.CtRa == 3) { da203 = 5 / 2; }
+            else if (player01.CtRa == 4) { da203 = 6 / 2; }
+            else if (player01.CtRa == 5) { da203 = 7 / 2; }
+            else if (player01.CtRa == 6) { da203 = 8 / 2; }
+            else if (player01.CtRa == -1) { da203 = 2 / 3; }
+            else if (player01.CtRa == -2) { da203 = 2 / 4; }
+            else if (player01.CtRa == -3) { da203 = 2 / 5; }
+            else if (player01.CtRa == -4) { da203 = 2 / 6; }
+            else if (player01.CtRa == -5) { da203 = 2 / 7; }
+            else if (player01.CtRa == -6) { da203 = 2 / 8; }
+            else { Debug.Log(" Cƒ‰ƒ“ƒNŒvZ¸”s"); }
+
+            //–hŒä‘¤ƒ‰ƒ“ƒN•â³
+
+            float da302 = 1;
+            if (player01.BtRa == 0) { da302 = 1; }
+            else if (player01.BtRa == 1) { da302 = 3 / 2; }
+            else if (player01.BtRa == 2) { da302 = 4 / 2; }
+            else if (player01.BtRa == 3) { da302 = 5 / 2; }
+            else if (player01.BtRa == 4) { da302 = 6 / 2; }
+            else if (player01.BtRa == 5) { da302 = 7 / 2; }
+            else if (player01.BtRa == 6) { da302 = 8 / 2; }
+            else if (player01.BtRa == -1) { da302 = 2 / 3; }
+            else if (player01.BtRa == -2) { da302 = 2 / 4; }
+            else if (player01.BtRa == -3) { da302 = 2 / 5; }
+            else if (player01.BtRa == -4) { da302 = 2 / 6; }
+            else if (player01.BtRa == -5) { da302 = 2 / 7; }
+            else if (player01.BtRa == -6) { da302 = 2 / 8; }
+            else { Debug.Log(" Bƒ‰ƒ“ƒNŒvZ¸”s"); }
+
+            float da304 = 1;
+            if (player01.DtRa == 0) { da304 = 1; }
+            else if (player01.DtRa == 1) { da304 = 3 / 2; }
+            else if (player01.DtRa == 2) { da304 = 4 / 2; }
+            else if (player01.DtRa == 3) { da304 = 5 / 2; }
+            else if (player01.DtRa == 4) { da304 = 6 / 2; }
+            else if (player01.DtRa == 5) { da304 = 7 / 2; }
+            else if (player01.DtRa == 6) { da304 = 8 / 2; }
+            else if (player01.DtRa == -1) { da304 = 2 / 3; }
+            else if (player01.DtRa == -2) { da304 = 2 / 4; }
+            else if (player01.DtRa == -3) { da304 = 2 / 5; }
+            else if (player01.DtRa == -4) { da304 = 2 / 6; }
+            else if (player01.DtRa == -5) { da304 = 2 / 7; }
+            else if (player01.DtRa == -6) { da304 = 2 / 8; }
+            else { Debug.Log(" Dƒ‰ƒ“ƒNŒvZ¸”s"); }
 
 
-            float da04 = Mathf.Floor(Mathf.Floor(da01 * WeaponPower * da02 / da03) / 50 + 2);
+            //ƒ‰ƒ“ƒN•â³Œã‚ÌˆĞ—Í
+
+            float da02R = 0;
+            float da03R = 0;
+
+
+            if (choiceCommand01 == 1 && wf9001[4] == 1)
+            {
+                da02R = da201;
+                da03R = da302;
+            }
+            else if (choiceCommand01 == 1 && wf9001[4] == 2)
+            {
+                da02R = da203;
+                da03R = da304;
+            }
+            else if (choiceCommand01 == 2 && wf9002[4] == 1)
+            {
+                da02R = da201;
+                da03R = da302;
+            }
+            else if (choiceCommand01 == 2 && wf9002[4] == 2)
+            {
+                da02R = da203;
+                da03R = da304;
+            }
+            else if (choiceCommand01 == 3 && wf9002[4] == 1)
+            {
+                da02R = da201;
+                da03R = da302;
+            }
+            else if (choiceCommand01 == 3 && wf9002[4] == 2)
+            {
+                da02R = da203;
+                da03R = da304;
+            }
+            else if (choiceCommand01 == 4 && wf9002[4] == 1)
+            {
+                da02R = da201;
+                da03R = da302;
+            }
+            else if (choiceCommand01 == 4 && wf9002[4] == 2)
+            {
+                da02R = da203;
+                da03R = da304;
+            }
+            else
+            {
+                Debug.Log(" •¨—“Áêƒ‰ƒ“ƒN‚Ì‘I‘ğ¸”s");
+            }
+
+
+
+
+            //ÅIˆĞ—Í=Šî‘bˆĞ—Í~ˆĞ—Í•â³/4096
+
+
+            float da04 = Mathf.Floor(Mathf.Floor(da01 * WeaponPower * da02 *da02R / (da03*da03R)) / 50 + 2);
 
             Debug.Log("‚©‚Á‚±“à‚ÌŒvZ’l" + da04);
 
@@ -603,8 +728,11 @@ public class GameManager : MonoBehaviour
             float da14 = 0;
             float da15 = 0;
 
+
+            //‹Zƒ^ƒCƒv¨–hŒäƒ^ƒCƒv1
             //UŒ‚‘¤‚ªƒm[ƒ}ƒ‹
-                 if (da13 == 1 && player02.type[0] == 1) { da14 = 1; }
+            if (da13 == 1 && player02.type[0] == 0) { da14 = 1; }
+            else if (da13 == 1 && player02.type[0] == 1) { da14 = 1; }
             else if (da13 == 1 && player02.type[0] == 2) { da14 = 1; }
             else if (da13 == 1 && player02.type[0] == 3) { da14 = 1; }
             else if (da13 == 1 && player02.type[0] == 4) { da14 = 1; }
@@ -616,16 +744,17 @@ public class GameManager : MonoBehaviour
             else if (da13 == 1 && player02.type[0] == 10) { da14 = 1; }
             else if (da13 == 1 && player02.type[0] == 11) { da14 = 1; }
             else if (da13 == 1 && player02.type[0] == 12) { da14 = 1; }
-            else if (da13 == 1 && player02.type[0] == 13) { da14 = 1/2;}    //Šâ
+            else if (da13 == 1 && player02.type[0] == 13) { da14 = 1 / 2; }    //Šâ
             else if (da13 == 1 && player02.type[0] == 14) { da14 = 0; }     //—ì
             else if (da13 == 1 && player02.type[0] == 15) { da14 = 1; }
             else if (da13 == 1 && player02.type[0] == 16) { da14 = 1; }
             else if (da13 == 1 && player02.type[0] == 17) { da14 = 1 / 2; }  //|
             else if (da13 == 1 && player02.type[0] == 18) { da14 = 1; }
             //UŒ‚‘¤‚ª‰Š
+            else if (da13 == 2 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
             else if (da13 == 2 && player02.type[0] == 1) { da14 = 1; }
-            else if (da13 == 2 && player02.type[0] == 2) { da14 = 1/2; }@//‰Š
-            else if (da13 == 2 && player02.type[0] == 3) { da14 = 1/2; }@//…
+            else if (da13 == 2 && player02.type[0] == 2) { da14 = 1 / 2; }@//‰Š
+            else if (da13 == 2 && player02.type[0] == 3) { da14 = 1 / 2; }@//…
             else if (da13 == 2 && player02.type[0] == 4) { da14 = 1; }
             else if (da13 == 2 && player02.type[0] == 5) { da14 = 2; }  //‘
             else if (da13 == 2 && player02.type[0] == 6) { da14 = 2; }  //•X
@@ -642,6 +771,7 @@ public class GameManager : MonoBehaviour
             else if (da13 == 2 && player02.type[0] == 17) { da14 = 2; }  //|
             else if (da13 == 2 && player02.type[0] == 18) { da14 = 1; }
             //UŒ‚‘¤‚ª…
+            else if (da13 == 3 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
             else if (da13 == 3 && player02.type[0] == 1) { da14 = 1; }
             else if (da13 == 3 && player02.type[0] == 2) { da14 = 2; }@//‰Š
             else if (da13 == 3 && player02.type[0] == 3) { da14 = 1 / 2; }@//…
@@ -656,12 +786,13 @@ public class GameManager : MonoBehaviour
             else if (da13 == 3 && player02.type[0] == 12) { da14 = 2; }  //’
             else if (da13 == 3 && player02.type[0] == 13) { da14 = 2; }  //Šâ
             else if (da13 == 3 && player02.type[0] == 14) { da14 = 1; }  //—ì
-            else if (da13 == 3 && player02.type[0] == 15) { da14 = 1 /2; }  //—³
+            else if (da13 == 3 && player02.type[0] == 15) { da14 = 1 / 2; }  //—³
             else if (da13 == 3 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
             else if (da13 == 3 && player02.type[0] == 17) { da14 = 2; }  //|
             else if (da13 == 3 && player02.type[0] == 18) { da14 = 1; } //—d
             //UŒ‚‘¤‚ª“d
-            else if (da13 == 4 && player02.type[0] == 1) { da14 = 1; }
+            else if (da13 == 4 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 4 && player02.type[0] == 1) { da14 = 1; }  //ƒm
             else if (da13 == 4 && player02.type[0] == 2) { da14 = 1; }@//‰Š
             else if (da13 == 4 && player02.type[0] == 3) { da14 = 2; }@//…
             else if (da13 == 4 && player02.type[0] == 4) { da14 = 1 / 2; }@@@//“d
@@ -678,17 +809,732 @@ public class GameManager : MonoBehaviour
             else if (da13 == 4 && player02.type[0] == 15) { da14 = 1 / 2; }  //—³
             else if (da13 == 4 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
             else if (da13 == 4 && player02.type[0] == 17) { da14 = 1; }  //|
-            else if (da13 == 4 && player02.type[0] == 18) { da14 = 1; }@//—d
+            else if (da13 == 4 && player02.type[0] == 18) { da14 = 1; } //—d
+            //UŒ‚‘¤‚ª‘
+            else if (da13 == 5 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 5 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 5 && player02.type[0] == 2) { da14 = 1 / 2; }@//‰Š
+            else if (da13 == 5 && player02.type[0] == 3) { da14 = 2; }@//…
+            else if (da13 == 5 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 5 && player02.type[0] == 5) { da14 = 1 / 2; }  //‘
+            else if (da13 == 5 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 5 && player02.type[0] == 7) { da14 = 1; }@//Ši
+            else if (da13 == 5 && player02.type[0] == 8) { da14 = 1 / 2; }@//“Å
+            else if (da13 == 5 && player02.type[0] == 9) { da14 = 2; }  //’n
+            else if (da13 == 5 && player02.type[0] == 10) { da14 = 1 / 2; }@//”ò
+            else if (da13 == 5 && player02.type[0] == 11) { da14 = 1; }@//’´
+            else if (da13 == 5 && player02.type[0] == 12) { da14 = 1 / 2; }  //’
+            else if (da13 == 5 && player02.type[0] == 13) { da14 = 2; }  //Šâ
+            else if (da13 == 5 && player02.type[0] == 14) { da14 = 1; }  //—ì
+            else if (da13 == 5 && player02.type[0] == 15) { da14 = 1 / 2; }  //—³
+            else if (da13 == 5 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
+            else if (da13 == 5 && player02.type[0] == 17) { da14 = 1 / 2; }  //|
+            else if (da13 == 5 && player02.type[0] == 18) { da14 = 1; } //—d
+            //UŒ‚‘¤‚ª•X
+            else if (da13 == 6 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 6 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 6 && player02.type[0] == 2) { da14 = 1 / 2; }@//‰Š
+            else if (da13 == 6 && player02.type[0] == 3) { da14 = 1 / 2; }@//…
+            else if (da13 == 6 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 6 && player02.type[0] == 5) { da14 = 2; }  //‘
+            else if (da13 == 6 && player02.type[0] == 6) { da14 = 1 / 2; }  //•X
+            else if (da13 == 6 && player02.type[0] == 7) { da14 = 1; }@//Ši
+            else if (da13 == 6 && player02.type[0] == 8) { da14 = 1; }@//“Å
+            else if (da13 == 6 && player02.type[0] == 9) { da14 = 2; }  //’n
+            else if (da13 == 6 && player02.type[0] == 10) { da14 = 2; }@//”ò
+            else if (da13 == 6 && player02.type[0] == 11) { da14 = 1; }@//’´
+            else if (da13 == 6 && player02.type[0] == 12) { da14 = 1; }  //’
+            else if (da13 == 6 && player02.type[0] == 13) { da14 = 1; }  //Šâ
+            else if (da13 == 6 && player02.type[0] == 14) { da14 = 1; }  //—ì
+            else if (da13 == 6 && player02.type[0] == 15) { da14 = 2; }  //—³
+            else if (da13 == 6 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
+            else if (da13 == 6 && player02.type[0] == 17) { da14 = 1 / 2; }  //|
+            else if (da13 == 6 && player02.type[0] == 18) { da14 = 1; } //—d
+            //UŒ‚‘¤‚ªŠi
+            else if (da13 == 7 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 7 && player02.type[0] == 1) { da14 = 2; }  //ƒm
+            else if (da13 == 7 && player02.type[0] == 2) { da14 = 1; }@//‰Š
+            else if (da13 == 7 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 7 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 7 && player02.type[0] == 5) { da14 = 1; }  //‘
+            else if (da13 == 7 && player02.type[0] == 6) { da14 = 2; }  //•X
+            else if (da13 == 7 && player02.type[0] == 7) { da14 = 1; }@//Ši
+            else if (da13 == 7 && player02.type[0] == 8) { da14 = 1 / 2; }@//“Å
+            else if (da13 == 7 && player02.type[0] == 9) { da14 = 1; }  //’n
+            else if (da13 == 7 && player02.type[0] == 10) { da14 = 1 / 2; }@//”ò
+            else if (da13 == 7 && player02.type[0] == 11) { da14 = 1 / 2; }@//’´
+            else if (da13 == 7 && player02.type[0] == 12) { da14 = 1 / 2; }  //’
+            else if (da13 == 7 && player02.type[0] == 13) { da14 = 2; }  //Šâ
+            else if (da13 == 7 && player02.type[0] == 14) { da14 = 0; }  //—ì
+            else if (da13 == 7 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 7 && player02.type[0] == 16) { da14 = 2; }  //ˆ«
+            else if (da13 == 7 && player02.type[0] == 17) { da14 = 2; }  //|
+            else if (da13 == 7 && player02.type[0] == 18) { da14 = 1 / 2; } //—d
+            //UŒ‚‘¤‚ª“Å
+            else if (da13 == 8 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 8 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 8 && player02.type[0] == 2) { da14 = 1; }@//‰Š
+            else if (da13 == 8 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 8 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 8 && player02.type[0] == 5) { da14 = 2; }  //‘
+            else if (da13 == 8 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 8 && player02.type[0] == 7) { da14 = 1; }@//Ši
+            else if (da13 == 8 && player02.type[0] == 8) { da14 = 1 / 2; }@//“Å
+            else if (da13 == 8 && player02.type[0] == 9) { da14 = 1 / 2; }  //’n
+            else if (da13 == 8 && player02.type[0] == 10) { da14 = 1; }@//”ò
+            else if (da13 == 8 && player02.type[0] == 11) { da14 = 1; }@//’´
+            else if (da13 == 8 && player02.type[0] == 12) { da14 = 1; }  //’
+            else if (da13 == 8 && player02.type[0] == 13) { da14 = 1 / 2; }  //Šâ
+            else if (da13 == 8 && player02.type[0] == 14) { da14 = 1 / 2; }  //—ì
+            else if (da13 == 8 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 8 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
+            else if (da13 == 8 && player02.type[0] == 17) { da14 = 0; }  //|
+            else if (da13 == 8 && player02.type[0] == 18) { da14 = 2; } //—d
+            //UŒ‚‘¤‚ª’n–Ê
+            else if (da13 == 9 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 9 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 9 && player02.type[0] == 2) { da14 = 2; }@//‰Š
+            else if (da13 == 9 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 9 && player02.type[0] == 4) { da14 = 2; }@@@//“d
+            else if (da13 == 9 && player02.type[0] == 5) { da14 = 1 / 2; }  //‘
+            else if (da13 == 9 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 9 && player02.type[0] == 7) { da14 = 1; }@//Ši
+            else if (da13 == 9 && player02.type[0] == 8) { da14 = 2; }@//“Å
+            else if (da13 == 9 && player02.type[0] == 9) { da14 = 2; }  //’n
+            else if (da13 == 9 && player02.type[0] == 10) { da14 = 0; }@//”ò
+            else if (da13 == 9 && player02.type[0] == 11) { da14 = 1; }@//’´
+            else if (da13 == 9 && player02.type[0] == 12) { da14 = 1 / 2; }  //’
+            else if (da13 == 9 && player02.type[0] == 13) { da14 = 2; }  //Šâ
+            else if (da13 == 9 && player02.type[0] == 14) { da14 = 1; }  //—ì
+            else if (da13 == 9 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 9 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
+            else if (da13 == 9 && player02.type[0] == 17) { da14 = 2; }  //|
+            else if (da13 == 9 && player02.type[0] == 18) { da14 = 1; } //—d
+            //UŒ‚‘¤‚ª”òs
+            else if (da13 == 10 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 10 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 10 && player02.type[0] == 2) { da14 = 1; }@//‰Š
+            else if (da13 == 10 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 10 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 10 && player02.type[0] == 5) { da14 = 2; }  //‘
+            else if (da13 == 10 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 10 && player02.type[0] == 7) { da14 = 2; }@//Ši
+            else if (da13 == 10 && player02.type[0] == 8) { da14 = 1; }@//“Å
+            else if (da13 == 10 && player02.type[0] == 9) { da14 = 1; }  //’n
+            else if (da13 == 10 && player02.type[0] == 10) { da14 = 1; }@//”ò
+            else if (da13 == 10 && player02.type[0] == 11) { da14 = 1; }@//’´
+            else if (da13 == 10 && player02.type[0] == 12) { da14 = 2; }  //’
+            else if (da13 == 10 && player02.type[0] == 13) { da14 = 1 / 2; }  //Šâ
+            else if (da13 == 10 && player02.type[0] == 14) { da14 = 1; }  //—ì
+            else if (da13 == 10 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 10 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
+            else if (da13 == 10 && player02.type[0] == 17) { da14 = 1 / 2; }  //|
+            else if (da13 == 10 && player02.type[0] == 18) { da14 = 1; } //—d
+            //UŒ‚‘¤‚ª’´
+            else if (da13 == 11 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 11 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 11 && player02.type[0] == 2) { da14 = 1; }@//‰Š
+            else if (da13 == 11 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 11 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 11 && player02.type[0] == 5) { da14 = 1; }  //‘
+            else if (da13 == 11 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 11 && player02.type[0] == 7) { da14 = 2; }@//Ši
+            else if (da13 == 11 && player02.type[0] == 8) { da14 = 2; }@//“Å
+            else if (da13 == 11 && player02.type[0] == 9) { da14 = 1; }  //’n
+            else if (da13 == 11 && player02.type[0] == 10) { da14 = 1; }@//”ò
+            else if (da13 == 11 && player02.type[0] == 11) { da14 = 1 / 2; }@//’´
+            else if (da13 == 11 && player02.type[0] == 12) { da14 = 1; }  //’
+            else if (da13 == 11 && player02.type[0] == 13) { da14 = 2; }  //Šâ
+            else if (da13 == 11 && player02.type[0] == 14) { da14 = 1; }  //—ì
+            else if (da13 == 11 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 11 && player02.type[0] == 16) { da14 = 0; }  //ˆ«
+            else if (da13 == 11 && player02.type[0] == 17) { da14 = 1 / 2; }  //|
+            else if (da13 == 11 && player02.type[0] == 18) { da14 = 1; } //—d
+            //UŒ‚‘¤‚ª’
+            else if (da13 == 12 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 12 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 12 && player02.type[0] == 2) { da14 = 1 / 2; }@//‰Š
+            else if (da13 == 12 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 12 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 12 && player02.type[0] == 5) { da14 = 2; }  //‘
+            else if (da13 == 12 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 12 && player02.type[0] == 7) { da14 = 1 / 2; }@//Ši
+            else if (da13 == 12 && player02.type[0] == 8) { da14 = 1 / 2; }@//“Å
+            else if (da13 == 12 && player02.type[0] == 9) { da14 = 1; }  //’n
+            else if (da13 == 12 && player02.type[0] == 10) { da14 = 1 / 2; }@//”ò
+            else if (da13 == 12 && player02.type[0] == 11) { da14 = 2; }@//’´
+            else if (da13 == 12 && player02.type[0] == 12) { da14 = 1; }  //’
+            else if (da13 == 12 && player02.type[0] == 13) { da14 = 2; }  //Šâ
+            else if (da13 == 12 && player02.type[0] == 14) { da14 = 1 / 2; }  //—ì
+            else if (da13 == 12 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 12 && player02.type[0] == 16) { da14 = 2; }  //ˆ«
+            else if (da13 == 12 && player02.type[0] == 17) { da14 = 1 / 2; }  //|
+            else if (da13 == 12 && player02.type[0] == 18) { da14 = 1 / 2; } //—d
+            //UŒ‚‘¤‚ªŠâ
+            else if (da13 == 13 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 13 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 13 && player02.type[0] == 2) { da14 = 2; }@//‰Š
+            else if (da13 == 13 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 13 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 13 && player02.type[0] == 5) { da14 = 1; }  //‘
+            else if (da13 == 13 && player02.type[0] == 6) { da14 = 2; }  //•X
+            else if (da13 == 13 && player02.type[0] == 7) { da14 = 1 / 2; }@//Ši
+            else if (da13 == 13 && player02.type[0] == 8) { da14 = 1; }@//“Å
+            else if (da13 == 13 && player02.type[0] == 9) { da14 = 1 / 2; }  //’n
+            else if (da13 == 13 && player02.type[0] == 10) { da14 = 2; }@//”ò
+            else if (da13 == 13 && player02.type[0] == 11) { da14 = 1; }@//’´
+            else if (da13 == 13 && player02.type[0] == 12) { da14 = 2; }  //’
+            else if (da13 == 13 && player02.type[0] == 13) { da14 = 1; }  //Šâ
+            else if (da13 == 13 && player02.type[0] == 14) { da14 = 1; }  //—ì
+            else if (da13 == 13 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 13 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
+            else if (da13 == 13 && player02.type[0] == 17) { da14 = 1 / 2; }  //|
+            else if (da13 == 13 && player02.type[0] == 18) { da14 = 1; } //—d
+            //UŒ‚‘¤‚ª—ì
+            else if (da13 == 14 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 14 && player02.type[0] == 1) { da14 = 0; }  //ƒm
+            else if (da13 == 14 && player02.type[0] == 2) { da14 = 1; }@//‰Š
+            else if (da13 == 14 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 14 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 14 && player02.type[0] == 5) { da14 = 1; }  //‘
+            else if (da13 == 14 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 14 && player02.type[0] == 7) { da14 = 1; }@//Ši
+            else if (da13 == 14 && player02.type[0] == 8) { da14 = 1; }@//“Å
+            else if (da13 == 14 && player02.type[0] == 9) { da14 = 1; }  //’n
+            else if (da13 == 14 && player02.type[0] == 10) { da14 = 1; }@//”ò
+            else if (da13 == 14 && player02.type[0] == 11) { da14 = 2; }@//’´
+            else if (da13 == 14 && player02.type[0] == 12) { da14 = 1; }  //’
+            else if (da13 == 14 && player02.type[0] == 13) { da14 = 1; }  //Šâ
+            else if (da13 == 14 && player02.type[0] == 14) { da14 = 2; }  //—ì
+            else if (da13 == 14 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 14 && player02.type[0] == 16) { da14 = 1 / 2; }  //ˆ«
+            else if (da13 == 14 && player02.type[0] == 17) { da14 = 1; }  //|
+            else if (da13 == 14 && player02.type[0] == 18) { da14 = 1; } //—d
+            //UŒ‚‘¤‚ª—³
+            else if (da13 == 15 && player02.type[0] == 0) { da14 = 1; }  //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 15 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 15 && player02.type[0] == 2) { da14 = 1; }@//‰Š
+            else if (da13 == 15 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 15 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 15 && player02.type[0] == 5) { da14 = 1; }  //‘
+            else if (da13 == 15 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 15 && player02.type[0] == 7) { da14 = 1; }@//Ši
+            else if (da13 == 15 && player02.type[0] == 8) { da14 = 1; }@//“Å
+            else if (da13 == 15 && player02.type[0] == 9) { da14 = 1; }  //’n
+            else if (da13 == 15 && player02.type[0] == 10) { da14 = 1; }@//”ò
+            else if (da13 == 15 && player02.type[0] == 11) { da14 = 1; }@//’´
+            else if (da13 == 15 && player02.type[0] == 12) { da14 = 1; }  //’
+            else if (da13 == 15 && player02.type[0] == 13) { da14 = 1; }  //Šâ
+            else if (da13 == 15 && player02.type[0] == 14) { da14 = 1; }  //—ì
+            else if (da13 == 15 && player02.type[0] == 15) { da14 = 2; }  //—³
+            else if (da13 == 15 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
+            else if (da13 == 15 && player02.type[0] == 17) { da14 = 1 / 2; }  //|
+            else if (da13 == 15 && player02.type[0] == 18) { da14 = 0; } //—d
+            //UŒ‚‘¤‚ªˆ«
+            else if (da13 == 16 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 16 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 16 && player02.type[0] == 2) { da14 = 1; }@//‰Š
+            else if (da13 == 16 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 16 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 16 && player02.type[0] == 5) { da14 = 1; }  //‘
+            else if (da13 == 16 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 16 && player02.type[0] == 7) { da14 = 1 / 2; }@//Ši
+            else if (da13 == 16 && player02.type[0] == 8) { da14 = 1; }@//“Å
+            else if (da13 == 16 && player02.type[0] == 9) { da14 = 1; }  //’n
+            else if (da13 == 16 && player02.type[0] == 10) { da14 = 1; }@//”ò
+            else if (da13 == 16 && player02.type[0] == 11) { da14 = 2; }@//’´
+            else if (da13 == 16 && player02.type[0] == 12) { da14 = 1; }  //’
+            else if (da13 == 16 && player02.type[0] == 13) { da14 = 1; }  //Šâ
+            else if (da13 == 16 && player02.type[0] == 14) { da14 = 2; }  //—ì
+            else if (da13 == 16 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 16 && player02.type[0] == 16) { da14 = 1 / 2; }  //ˆ«
+            else if (da13 == 16 && player02.type[0] == 17) { da14 = 1; }  //|
+            else if (da13 == 16 && player02.type[0] == 18) { da14 = 1 / 2; } //—d
+            //UŒ‚‘¤‚ª|
+            else if (da13 == 17 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 17 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 17 && player02.type[0] == 2) { da14 = 1 / 2; }@//‰Š
+            else if (da13 == 17 && player02.type[0] == 3) { da14 = 1 / 2; }@//…
+            else if (da13 == 17 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 17 && player02.type[0] == 5) { da14 = 1; }  //‘
+            else if (da13 == 17 && player02.type[0] == 6) { da14 = 2; }  //•X
+            else if (da13 == 17 && player02.type[0] == 7) { da14 = 1; }@//Ši
+            else if (da13 == 17 && player02.type[0] == 8) { da14 = 1; }@//“Å
+            else if (da13 == 17 && player02.type[0] == 9) { da14 = 1; }  //’n
+            else if (da13 == 17 && player02.type[0] == 10) { da14 = 1; }@//”ò
+            else if (da13 == 17 && player02.type[0] == 11) { da14 = 2; }@//’´
+            else if (da13 == 17 && player02.type[0] == 12) { da14 = 1; }  //’
+            else if (da13 == 17 && player02.type[0] == 13) { da14 = 2; }  //Šâ
+            else if (da13 == 17 && player02.type[0] == 14) { da14 = 1; }  //—ì
+            else if (da13 == 17 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 17 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
+            else if (da13 == 17 && player02.type[0] == 17) { da14 = 1 / 2; }  //|
+            else if (da13 == 17 && player02.type[0] == 18) { da14 = 2; } //—d
+            //UŒ‚‘¤‚ª—d
+            else if (da13 == 18 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 18 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 18 && player02.type[0] == 2) { da14 = 1 / 2; }@//‰Š
+            else if (da13 == 18 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 18 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 18 && player02.type[0] == 5) { da14 = 1; }  //‘
+            else if (da13 == 18 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 18 && player02.type[0] == 7) { da14 = 2; }@//Ši
+            else if (da13 == 18 && player02.type[0] == 8) { da14 = 1 / 2; }@//“Å
+            else if (da13 == 18 && player02.type[0] == 9) { da14 = 1; }  //’n
+            else if (da13 == 18 && player02.type[0] == 10) { da14 = 1; }@//”ò
+            else if (da13 == 18 && player02.type[0] == 11) { da14 = 1; }@//’´
+            else if (da13 == 18 && player02.type[0] == 12) { da14 = 1; }  //’
+            else if (da13 == 18 && player02.type[0] == 13) { da14 = 1; }  //Šâ
+            else if (da13 == 18 && player02.type[0] == 14) { da14 = 1; }  //—ì
+            else if (da13 == 18 && player02.type[0] == 15) { da14 = 2; }  //—³
+            else if (da13 == 18 && player02.type[0] == 16) { da14 = 2; }  //ˆ«
+            else if (da13 == 18 && player02.type[0] == 17) { da14 = 1 / 2; }  //|
+            else if (da13 == 18 && player02.type[0] == 18) { da14 = 1; } //—d
+            //UŒ‚‘¤‚ªƒ^ƒCƒv‚È‚µ
+            else if (da13 == 19 && player02.type[0] == 0) { da14 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 19 && player02.type[0] == 1) { da14 = 1; }  //ƒm
+            else if (da13 == 19 && player02.type[0] == 2) { da14 = 1; }@//‰Š
+            else if (da13 == 19 && player02.type[0] == 3) { da14 = 1; }@//…
+            else if (da13 == 19 && player02.type[0] == 4) { da14 = 1; }@@@//“d
+            else if (da13 == 19 && player02.type[0] == 5) { da14 = 1; }  //‘
+            else if (da13 == 19 && player02.type[0] == 6) { da14 = 1; }  //•X
+            else if (da13 == 19 && player02.type[0] == 7) { da14 = 1; }@//Ši
+            else if (da13 == 19 && player02.type[0] == 8) { da14 = 1; }@//“Å
+            else if (da13 == 19 && player02.type[0] == 9) { da14 = 1; }  //’n
+            else if (da13 == 19 && player02.type[0] == 10) { da14 = 1; }@//”ò
+            else if (da13 == 19 && player02.type[0] == 11) { da14 = 1; }@//’´
+            else if (da13 == 19 && player02.type[0] == 12) { da14 = 1; }  //’
+            else if (da13 == 19 && player02.type[0] == 13) { da14 = 1; }  //Šâ
+            else if (da13 == 19 && player02.type[0] == 14) { da14 = 1; }  //—ì
+            else if (da13 == 19 && player02.type[0] == 15) { da14 = 1; }  //—³
+            else if (da13 == 19 && player02.type[0] == 16) { da14 = 1; }  //ˆ«
+            else if (da13 == 19 && player02.type[0] == 17) { da14 = 1; }  //|
+            else if (da13 == 19 && player02.type[0] == 18) { da14 = 1; } //—d
+
+            else { Debug.Log("‘Š«”»’è1¸”s"); };
 
 
+            //‹Zƒ^ƒCƒv¨–hŒäƒ^ƒCƒv2
+            //UŒ‚‘¤‚ªƒm[ƒ}ƒ‹
+            if (da13 == 1 && player02.type[1] == 0) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 1) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 2) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 3) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 4) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 5) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 6) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 7) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 8) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 9) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 10) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 11) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 12) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 13) { da15 = 1 / 2; }    //Šâ
+            else if (da13 == 1 && player02.type[1] == 14) { da15 = 0; }     //—ì
+            else if (da13 == 1 && player02.type[1] == 15) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 16) { da15 = 1; }
+            else if (da13 == 1 && player02.type[1] == 17) { da15 = 1 / 2; }  //|
+            else if (da13 == 1 && player02.type[1] == 18) { da15 = 1; }
+            //UŒ‚‘¤‚ª‰Š
+            else if (da13 == 2 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 2 && player02.type[1] == 1) { da15 = 1; }
+            else if (da13 == 2 && player02.type[1] == 2) { da15 = 1 / 2; } //‰Š
+            else if (da13 == 2 && player02.type[1] == 3) { da15 = 1 / 2; } //…
+            else if (da13 == 2 && player02.type[1] == 4) { da15 = 1; }
+            else if (da13 == 2 && player02.type[1] == 5) { da15 = 2; }  //‘
+            else if (da13 == 2 && player02.type[1] == 6) { da15 = 2; }  //•X
+            else if (da13 == 2 && player02.type[1] == 7) { da15 = 1; }
+            else if (da13 == 2 && player02.type[1] == 8) { da15 = 1; }
+            else if (da13 == 2 && player02.type[1] == 9) { da15 = 1; }
+            else if (da13 == 2 && player02.type[1] == 10) { da15 = 1; }
+            else if (da13 == 2 && player02.type[1] == 11) { da15 = 1; }
+            else if (da13 == 2 && player02.type[1] == 12) { da15 = 2; }     //’
+            else if (da13 == 2 && player02.type[1] == 13) { da15 = 1 / 2; } //Šâ
+            else if (da13 == 2 && player02.type[1] == 14) { da15 = 1; }     //—ì
+            else if (da13 == 2 && player02.type[1] == 15) { da15 = 1; }
+            else if (da13 == 2 && player02.type[1] == 16) { da15 = 1; }
+            else if (da13 == 2 && player02.type[1] == 17) { da15 = 2; }  //|
+            else if (da13 == 2 && player02.type[1] == 18) { da15 = 1; }
+            //UŒ‚‘¤‚ª…
+            else if (da13 == 3 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 3 && player02.type[1] == 1) { da15 = 1; }
+            else if (da13 == 3 && player02.type[1] == 2) { da15 = 2; } //‰Š
+            else if (da13 == 3 && player02.type[1] == 3) { da15 = 1 / 2; } //…
+            else if (da13 == 3 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 3 && player02.type[1] == 5) { da15 = 1 / 2; }  //‘
+            else if (da13 == 3 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 3 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 3 && player02.type[1] == 8) { da15 = 1; } //“Å
+            else if (da13 == 3 && player02.type[1] == 9) { da15 = 2; }  //’n
+            else if (da13 == 3 && player02.type[1] == 10) { da15 = 1; } //”ò
+            else if (da13 == 3 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 3 && player02.type[1] == 12) { da15 = 2; }  //’
+            else if (da13 == 3 && player02.type[1] == 13) { da15 = 2; }  //Šâ
+            else if (da13 == 3 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 3 && player02.type[1] == 15) { da15 = 1 / 2; }  //—³
+            else if (da13 == 3 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 3 && player02.type[1] == 17) { da15 = 2; }  //|
+            else if (da13 == 3 && player02.type[1] == 18) { da15 = 1; } //—d
+            //UŒ‚‘¤‚ª“d
+            else if (da13 == 4 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 4 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 4 && player02.type[1] == 2) { da15 = 1; } //‰Š
+            else if (da13 == 4 && player02.type[1] == 3) { da15 = 2; } //…
+            else if (da13 == 4 && player02.type[1] == 4) { da15 = 1 / 2; }   //“d
+            else if (da13 == 4 && player02.type[1] == 5) { da15 = 1 / 2; }  //‘
+            else if (da13 == 4 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 4 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 4 && player02.type[1] == 8) { da15 = 1; } //“Å
+            else if (da13 == 4 && player02.type[1] == 9) { da15 = 0; }  //’n
+            else if (da13 == 4 && player02.type[1] == 10) { da15 = 2; } //”ò
+            else if (da13 == 4 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 4 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 4 && player02.type[1] == 13) { da15 = 1; }  //Šâ
+            else if (da13 == 4 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 4 && player02.type[1] == 15) { da15 = 1 / 2; }  //—³
+            else if (da13 == 4 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 4 && player02.type[1] == 17) { da15 = 1; }  //|
+            else if (da13 == 4 && player02.type[1] == 18) { da15 = 1; } //—d
+            //UŒ‚‘¤‚ª‘
+            else if (da13 == 5 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 5 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 5 && player02.type[1] == 2) { da15 = 1 / 2; } //‰Š
+            else if (da13 == 5 && player02.type[1] == 3) { da15 = 2; } //…
+            else if (da13 == 5 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 5 && player02.type[1] == 5) { da15 = 1 / 2; }  //‘
+            else if (da13 == 5 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 5 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 5 && player02.type[1] == 8) { da15 = 1 / 2; } //“Å
+            else if (da13 == 5 && player02.type[1] == 9) { da15 = 2; }  //’n
+            else if (da13 == 5 && player02.type[1] == 10) { da15 = 1 / 2; } //”ò
+            else if (da13 == 5 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 5 && player02.type[1] == 12) { da15 = 1 / 2; }  //’
+            else if (da13 == 5 && player02.type[1] == 13) { da15 = 2; }  //Šâ
+            else if (da13 == 5 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 5 && player02.type[1] == 15) { da15 = 1 / 2; }  //—³
+            else if (da13 == 5 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 5 && player02.type[1] == 17) { da15 = 1 / 2; }  //|
+            else if (da13 == 5 && player02.type[1] == 18) { da15 = 1; } //—d
+            //UŒ‚‘¤‚ª•X
+            else if (da13 == 6 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 6 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 6 && player02.type[1] == 2) { da15 = 1 / 2; } //‰Š
+            else if (da13 == 6 && player02.type[1] == 3) { da15 = 1 / 2; } //…
+            else if (da13 == 6 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 6 && player02.type[1] == 5) { da15 = 2; }  //‘
+            else if (da13 == 6 && player02.type[1] == 6) { da15 = 1 / 2; }  //•X
+            else if (da13 == 6 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 6 && player02.type[1] == 8) { da15 = 1; } //“Å
+            else if (da13 == 6 && player02.type[1] == 9) { da15 = 2; }  //’n
+            else if (da13 == 6 && player02.type[1] == 10) { da15 = 2; } //”ò
+            else if (da13 == 6 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 6 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 6 && player02.type[1] == 13) { da15 = 1; }  //Šâ
+            else if (da13 == 6 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 6 && player02.type[1] == 15) { da15 = 2; }  //—³
+            else if (da13 == 6 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 6 && player02.type[1] == 17) { da15 = 1 / 2; }  //|
+            else if (da13 == 6 && player02.type[1] == 18) { da15 = 1; } //—d
+            //UŒ‚‘¤‚ªŠi
+            else if (da13 == 7 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 7 && player02.type[1] == 1) { da15 = 2; }  //ƒm
+            else if (da13 == 7 && player02.type[1] == 2) { da15 = 1; } //‰Š
+            else if (da13 == 7 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 7 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 7 && player02.type[1] == 5) { da15 = 1; }  //‘
+            else if (da13 == 7 && player02.type[1] == 6) { da15 = 2; }  //•X
+            else if (da13 == 7 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 7 && player02.type[1] == 8) { da15 = 1 / 2; } //“Å
+            else if (da13 == 7 && player02.type[1] == 9) { da15 = 1; }  //’n
+            else if (da13 == 7 && player02.type[1] == 10) { da15 = 1 / 2; } //”ò
+            else if (da13 == 7 && player02.type[1] == 11) { da15 = 1 / 2; } //’´
+            else if (da13 == 7 && player02.type[1] == 12) { da15 = 1 / 2; }  //’
+            else if (da13 == 7 && player02.type[1] == 13) { da15 = 2; }  //Šâ
+            else if (da13 == 7 && player02.type[1] == 14) { da15 = 0; }  //—ì
+            else if (da13 == 7 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 7 && player02.type[1] == 16) { da15 = 2; }  //ˆ«
+            else if (da13 == 7 && player02.type[1] == 17) { da15 = 2; }  //|
+            else if (da13 == 7 && player02.type[1] == 18) { da15 = 1 / 2; } //—d
+            //UŒ‚‘¤‚ª“Å
+            else if (da13 == 8 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 8 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 8 && player02.type[1] == 2) { da15 = 1; } //‰Š
+            else if (da13 == 8 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 8 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 8 && player02.type[1] == 5) { da15 = 2; }  //‘
+            else if (da13 == 8 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 8 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 8 && player02.type[1] == 8) { da15 = 1 / 2; } //“Å
+            else if (da13 == 8 && player02.type[1] == 9) { da15 = 1 / 2; }  //’n
+            else if (da13 == 8 && player02.type[1] == 10) { da15 = 1; } //”ò
+            else if (da13 == 8 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 8 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 8 && player02.type[1] == 13) { da15 = 1 / 2; }  //Šâ
+            else if (da13 == 8 && player02.type[1] == 14) { da15 = 1 / 2; }  //—ì
+            else if (da13 == 8 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 8 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 8 && player02.type[1] == 17) { da15 = 0; }  //|
+            else if (da13 == 8 && player02.type[1] == 18) { da15 = 2; } //—d
+            //UŒ‚‘¤‚ª’n–Ê
+            else if (da13 == 9 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 9 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 9 && player02.type[1] == 2) { da15 = 2; } //‰Š
+            else if (da13 == 9 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 9 && player02.type[1] == 4) { da15 = 2; }   //“d
+            else if (da13 == 9 && player02.type[1] == 5) { da15 = 1 / 2; }  //‘
+            else if (da13 == 9 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 9 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 9 && player02.type[1] == 8) { da15 = 2; } //“Å
+            else if (da13 == 9 && player02.type[1] == 9) { da15 = 2; }  //’n
+            else if (da13 == 9 && player02.type[1] == 10) { da15 = 0; } //”ò
+            else if (da13 == 9 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 9 && player02.type[1] == 12) { da15 = 1 / 2; }  //’
+            else if (da13 == 9 && player02.type[1] == 13) { da15 = 2; }  //Šâ
+            else if (da13 == 9 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 9 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 9 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 9 && player02.type[1] == 17) { da15 = 2; }  //|
+            else if (da13 == 9 && player02.type[1] == 18) { da15 = 1; } //—d
+            //UŒ‚‘¤‚ª”òs
+            else if (da13 == 10 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 10 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 10 && player02.type[1] == 2) { da15 = 1; } //‰Š
+            else if (da13 == 10 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 10 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 10 && player02.type[1] == 5) { da15 = 2; }  //‘
+            else if (da13 == 10 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 10 && player02.type[1] == 7) { da15 = 2; } //Ši
+            else if (da13 == 10 && player02.type[1] == 8) { da15 = 1; } //“Å
+            else if (da13 == 10 && player02.type[1] == 9) { da15 = 1; }  //’n
+            else if (da13 == 10 && player02.type[1] == 10) { da15 = 1; } //”ò
+            else if (da13 == 10 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 10 && player02.type[1] == 12) { da15 = 2; }  //’
+            else if (da13 == 10 && player02.type[1] == 13) { da15 = 1 / 2; }  //Šâ
+            else if (da13 == 10 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 10 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 10 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 10 && player02.type[1] == 17) { da15 = 1 / 2; }  //|
+            else if (da13 == 10 && player02.type[1] == 18) { da15 = 1; } //—d
+            //UŒ‚‘¤‚ª’´
+            else if (da13 == 11 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 11 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 11 && player02.type[1] == 2) { da15 = 1; } //‰Š
+            else if (da13 == 11 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 11 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 11 && player02.type[1] == 5) { da15 = 1; }  //‘
+            else if (da13 == 11 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 11 && player02.type[1] == 7) { da15 = 2; } //Ši
+            else if (da13 == 11 && player02.type[1] == 8) { da15 = 2; } //“Å
+            else if (da13 == 11 && player02.type[1] == 9) { da15 = 1; }  //’n
+            else if (da13 == 11 && player02.type[1] == 10) { da15 = 1; } //”ò
+            else if (da13 == 11 && player02.type[1] == 11) { da15 = 1 / 2; } //’´
+            else if (da13 == 11 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 11 && player02.type[1] == 13) { da15 = 2; }  //Šâ
+            else if (da13 == 11 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 11 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 11 && player02.type[1] == 16) { da15 = 0; }  //ˆ«
+            else if (da13 == 11 && player02.type[1] == 17) { da15 = 1 / 2; }  //|
+            else if (da13 == 11 && player02.type[1] == 18) { da15 = 1; } //—d
+            //UŒ‚‘¤‚ª’
+            else if (da13 == 12 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 12 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 12 && player02.type[1] == 2) { da15 = 1 / 2; } //‰Š
+            else if (da13 == 12 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 12 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 12 && player02.type[1] == 5) { da15 = 2; }  //‘
+            else if (da13 == 12 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 12 && player02.type[1] == 7) { da15 = 1 / 2; } //Ši
+            else if (da13 == 12 && player02.type[1] == 8) { da15 = 1 / 2; } //“Å
+            else if (da13 == 12 && player02.type[1] == 9) { da15 = 1; }  //’n
+            else if (da13 == 12 && player02.type[1] == 10) { da15 = 1 / 2; } //”ò
+            else if (da13 == 12 && player02.type[1] == 11) { da15 = 2; } //’´
+            else if (da13 == 12 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 12 && player02.type[1] == 13) { da15 = 2; }  //Šâ
+            else if (da13 == 12 && player02.type[1] == 14) { da15 = 1 / 2; }  //—ì
+            else if (da13 == 12 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 12 && player02.type[1] == 16) { da15 = 2; }  //ˆ«
+            else if (da13 == 12 && player02.type[1] == 17) { da15 = 1 / 2; }  //|
+            else if (da13 == 12 && player02.type[1] == 18) { da15 = 1 / 2; } //—d
+            //UŒ‚‘¤‚ªŠâ
+            else if (da13 == 13 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 13 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 13 && player02.type[1] == 2) { da15 = 2; } //‰Š
+            else if (da13 == 13 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 13 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 13 && player02.type[1] == 5) { da15 = 1; }  //‘
+            else if (da13 == 13 && player02.type[1] == 6) { da15 = 2; }  //•X
+            else if (da13 == 13 && player02.type[1] == 7) { da15 = 1 / 2; } //Ši
+            else if (da13 == 13 && player02.type[1] == 8) { da15 = 1; } //“Å
+            else if (da13 == 13 && player02.type[1] == 9) { da15 = 1 / 2; }  //’n
+            else if (da13 == 13 && player02.type[1] == 10) { da15 = 2; } //”ò
+            else if (da13 == 13 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 13 && player02.type[1] == 12) { da15 = 2; }  //’
+            else if (da13 == 13 && player02.type[1] == 13) { da15 = 1; }  //Šâ
+            else if (da13 == 13 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 13 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 13 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 13 && player02.type[1] == 17) { da15 = 1 / 2; }  //|
+            else if (da13 == 13 && player02.type[1] == 18) { da15 = 1; } //—d
+            //UŒ‚‘¤‚ª—ì
+            else if (da13 == 14 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 14 && player02.type[1] == 1) { da15 = 0; }  //ƒm
+            else if (da13 == 14 && player02.type[1] == 2) { da15 = 1; } //‰Š
+            else if (da13 == 14 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 14 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 14 && player02.type[1] == 5) { da15 = 1; }  //‘
+            else if (da13 == 14 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 14 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 14 && player02.type[1] == 8) { da15 = 1; } //“Å
+            else if (da13 == 14 && player02.type[1] == 9) { da15 = 1; }  //’n
+            else if (da13 == 14 && player02.type[1] == 10) { da15 = 1; } //”ò
+            else if (da13 == 14 && player02.type[1] == 11) { da15 = 2; } //’´
+            else if (da13 == 14 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 14 && player02.type[1] == 13) { da15 = 1; }  //Šâ
+            else if (da13 == 14 && player02.type[1] == 14) { da15 = 2; }  //—ì
+            else if (da13 == 14 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 14 && player02.type[1] == 16) { da15 = 1 / 2; }  //ˆ«
+            else if (da13 == 14 && player02.type[1] == 17) { da15 = 1; }  //|
+            else if (da13 == 14 && player02.type[1] == 18) { da15 = 1; } //—d
+            //UŒ‚‘¤‚ª—³
+            else if (da13 == 15 && player02.type[1] == 0) { da15 = 1; }  //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 15 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 15 && player02.type[1] == 2) { da15 = 1; } //‰Š
+            else if (da13 == 15 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 15 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 15 && player02.type[1] == 5) { da15 = 1; }  //‘
+            else if (da13 == 15 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 15 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 15 && player02.type[1] == 8) { da15 = 1; } //“Å
+            else if (da13 == 15 && player02.type[1] == 9) { da15 = 1; }  //’n
+            else if (da13 == 15 && player02.type[1] == 10) { da15 = 1; } //”ò
+            else if (da13 == 15 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 15 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 15 && player02.type[1] == 13) { da15 = 1; }  //Šâ
+            else if (da13 == 15 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 15 && player02.type[1] == 15) { da15 = 2; }  //—³
+            else if (da13 == 15 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 15 && player02.type[1] == 17) { da15 = 1 / 2; }  //|
+            else if (da13 == 15 && player02.type[1] == 18) { da15 = 0; } //—d
+            //UŒ‚‘¤‚ªˆ«
+            else if (da13 == 16 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 16 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 16 && player02.type[1] == 2) { da15 = 1; } //‰Š
+            else if (da13 == 16 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 16 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 16 && player02.type[1] == 5) { da15 = 1; }  //‘
+            else if (da13 == 16 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 16 && player02.type[1] == 7) { da15 = 1 / 2; } //Ši
+            else if (da13 == 16 && player02.type[1] == 8) { da15 = 1; } //“Å
+            else if (da13 == 16 && player02.type[1] == 9) { da15 = 1; }  //’n
+            else if (da13 == 16 && player02.type[1] == 10) { da15 = 1; } //”ò
+            else if (da13 == 16 && player02.type[1] == 11) { da15 = 2; } //’´
+            else if (da13 == 16 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 16 && player02.type[1] == 13) { da15 = 1; }  //Šâ
+            else if (da13 == 16 && player02.type[1] == 14) { da15 = 2; }  //—ì
+            else if (da13 == 16 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 16 && player02.type[1] == 16) { da15 = 1 / 2; }  //ˆ«
+            else if (da13 == 16 && player02.type[1] == 17) { da15 = 1; }  //|
+            else if (da13 == 16 && player02.type[1] == 18) { da15 = 1 / 2; } //—d
+            //UŒ‚‘¤‚ª|
+            else if (da13 == 17 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 17 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 17 && player02.type[1] == 2) { da15 = 1 / 2; } //‰Š
+            else if (da13 == 17 && player02.type[1] == 3) { da15 = 1 / 2; } //…
+            else if (da13 == 17 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 17 && player02.type[1] == 5) { da15 = 1; }  //‘
+            else if (da13 == 17 && player02.type[1] == 6) { da15 = 2; }  //•X
+            else if (da13 == 17 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 17 && player02.type[1] == 8) { da15 = 1; } //“Å
+            else if (da13 == 17 && player02.type[1] == 9) { da15 = 1; }  //’n
+            else if (da13 == 17 && player02.type[1] == 10) { da15 = 1; } //”ò
+            else if (da13 == 17 && player02.type[1] == 11) { da15 = 2; } //’´
+            else if (da13 == 17 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 17 && player02.type[1] == 13) { da15 = 2; }  //Šâ
+            else if (da13 == 17 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 17 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 17 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 17 && player02.type[1] == 17) { da15 = 1 / 2; }  //|
+            else if (da13 == 17 && player02.type[1] == 18) { da15 = 2; } //—d
+            //UŒ‚‘¤‚ª—d
+            else if (da13 == 18 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 18 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 18 && player02.type[1] == 2) { da15 = 1 / 2; } //‰Š
+            else if (da13 == 18 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 18 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 18 && player02.type[1] == 5) { da15 = 1; }  //‘
+            else if (da13 == 18 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 18 && player02.type[1] == 7) { da15 = 2; } //Ši
+            else if (da13 == 18 && player02.type[1] == 8) { da15 = 1 / 2; } //“Å
+            else if (da13 == 18 && player02.type[1] == 9) { da15 = 1; }  //’n
+            else if (da13 == 18 && player02.type[1] == 10) { da15 = 1; } //”ò
+            else if (da13 == 18 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 18 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 18 && player02.type[1] == 13) { da15 = 1; }  //Šâ
+            else if (da13 == 18 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 18 && player02.type[1] == 15) { da15 = 2; }  //—³
+            else if (da13 == 18 && player02.type[1] == 16) { da15 = 2; }  //ˆ«
+            else if (da13 == 18 && player02.type[1] == 17) { da15 = 1 / 2; }  //|
+            else if (da13 == 18 && player02.type[1] == 18) { da15 = 1; } //—d
+            //UŒ‚‘¤‚ªƒ^ƒCƒv‚È‚µ
+            else if (da13 == 19 && player02.type[1] == 0) { da15 = 1; }      //ƒ^ƒCƒv‚È‚µ
+            else if (da13 == 19 && player02.type[1] == 1) { da15 = 1; }  //ƒm
+            else if (da13 == 19 && player02.type[1] == 2) { da15 = 1; } //‰Š
+            else if (da13 == 19 && player02.type[1] == 3) { da15 = 1; } //…
+            else if (da13 == 19 && player02.type[1] == 4) { da15 = 1; }   //“d
+            else if (da13 == 19 && player02.type[1] == 5) { da15 = 1; }  //‘
+            else if (da13 == 19 && player02.type[1] == 6) { da15 = 1; }  //•X
+            else if (da13 == 19 && player02.type[1] == 7) { da15 = 1; } //Ši
+            else if (da13 == 19 && player02.type[1] == 8) { da15 = 1; } //“Å
+            else if (da13 == 19 && player02.type[1] == 9) { da15 = 1; }  //’n
+            else if (da13 == 19 && player02.type[1] == 10) { da15 = 1; } //”ò
+            else if (da13 == 19 && player02.type[1] == 11) { da15 = 1; } //’´
+            else if (da13 == 19 && player02.type[1] == 12) { da15 = 1; }  //’
+            else if (da13 == 19 && player02.type[1] == 13) { da15 = 1; }  //Šâ
+            else if (da13 == 19 && player02.type[1] == 14) { da15 = 1; }  //—ì
+            else if (da13 == 19 && player02.type[1] == 15) { da15 = 1; }  //—³
+            else if (da13 == 19 && player02.type[1] == 16) { da15 = 1; }  //ˆ«
+            else if (da13 == 19 && player02.type[1] == 17) { da15 = 1; }  //|
+            else if (da13 == 19 && player02.type[1] == 18) { da15 = 1; } //—d
+
+            else { Debug.Log("‘Š«”»’è2¸”s"); };
+
+            //ƒ^ƒCƒv‘Š«‡Œv”»’è
+            float da16 = da14 * da15;
+            if (da16 == 1) { Debug.Log("‘Š«“™”{"); }
+            else if (da16 == 2) { Debug.Log("Œø‰Ê‚Í”²ŒQ‚¾(2”{)"); }
+            else if (da16 == 0.5f) { Debug.Log("Œø‰Ê‚Í‚¢‚Ü‚Ğ‚Æ‚Â‚Ì‚æ‚¤‚¾(0.5”{)"); }
+            else if (da16 == 0.25f) { Debug.Log("Œø‰Ê‚Í‚¢‚Ü‚Ğ‚Æ‚Â‚Ì‚æ‚¤‚¾(0.25”{)"); }
+            else if (da16 == 0f) { Debug.Log("Œø‰Ê‚Í‚È‚¢‚æ‚¤‚¾"); }
+            else { Debug.Log("‘Š«‡Œv”»’è¸”s"); }
+
+            float da17 = Mathf.Floor(da12 * da16);
+            Debug.Log("‘Š«”»’èŒã" + da17);
 
 
+            //‚â‚¯‚Ç”»’è
+            float da18=da17 ;
 
-            player02.HPNow -= player01.AtRl;
+            //M•â³(•Ç•â³~ƒuƒŒƒCƒ“ƒtƒH[ƒX•â³~ƒXƒiƒCƒp[•â³~
+            //‚¢‚ë‚ß‚ª‚Ë•â³~‚à‚Ó‚à‚Ó‚Ù‚Ì‚¨•â³~Mhalf~Mfilter~
+            //ƒtƒŒƒ“ƒhƒK[ƒh•â³~‚½‚Â‚¶‚ñ‚Ì‚¨‚Ñ•â³~ƒƒgƒƒm[ƒ€•â³~
+            //‚¢‚Ì‚¿‚Ì‚½‚Ü•â³~”¼Œ¸‚ÌÀ•â³~Mtwice(¬”“_ˆÈ‰º‚ğ’€ˆêlÌŒÜ“ü)(ÅI“I‚ÉŒÜÌŒÜ’´“ü)
+
+            float da19 = Mathf.Ceil(da18-0.5f);
+
+            //Mprotect•â³(ZƒƒU/ƒ_ƒCƒ}ƒbƒNƒX‚í‚´‚ª‚Ü‚à‚éó‘Ô‚È‚Ç‚ÅŒyŒ¸‚³‚ê‚½‚Æ‚«0.25”{)
+
+            float da20 = da19;
+
+            Debug.Log("ÅIƒ_ƒ[ƒWŠÖ”’l" + da20);
+
+
+@@@@@@//ÅIƒ_ƒ[ƒWŒvZ
+
+            player02.HPNow -= da20;
 
             player02.statusDisplay();
 
-            Debug.Log("ƒ‚ƒ“ƒXƒ^[06‚ÌHP" + player02.HPNow);
+            Debug.Log("ƒ‚ƒ“ƒXƒ^[06‚ÌHP" + player02.HPNow +"/"+ player02.HPMax);
 
 
             //ƒXƒeƒCƒg•ÏX

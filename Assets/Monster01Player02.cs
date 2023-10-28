@@ -37,11 +37,11 @@ public class Monster01Player02 : MonoBehaviour
     public float DtRl;    //特殊防御実数値
     public float StRl;    //素早さ実数値
 
-    public int AtRa;　　//物理攻撃ランク
-    public int BtRa; 　 //物理防御ランク
-    public int CtRa; 　 //特殊攻撃ランク
-    public int DtRa;    //特殊防御ランク
-    public int StRa;    //素早さランク
+    public int AtRa = 0;　　//物理攻撃ランク
+    public int BtRa = 0; 　 //物理防御ランク
+    public int CtRa = 0; 　 //特殊攻撃ランク
+    public int DtRa = 0;    //特殊防御ランク
+    public int StRa = 0;    //素早さランク
 
 
 
