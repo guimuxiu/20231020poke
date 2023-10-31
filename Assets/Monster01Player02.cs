@@ -137,13 +137,37 @@ public class Monster01Player02 : MonoBehaviour
     }
     public void requestAttack(int number)
     {
-        GetComponent<Animator>().SetTrigger("Attack0" + number);
+         if(number == 01)
+        {
+            GetComponent<Animator>().SetTrigger("Attack01");
+        }
+        else if (number == 02)
+        {
+            GetComponent<Animator>().SetTrigger("Attack02");
+        }
+        else if (number == 03)
+        {
+            GetComponent<Animator>().SetTrigger("Attack03");
+        }
+
     }
 
     public void requestDamage()
     {
         GetComponent<Animator>().SetTrigger("Damage");
     }
+    public void requestDeath()
+    {
+        GetComponent<Animator>().SetTrigger("Death");
+    }
+
+    public void requestRelive()
+    {
+        GetComponent<Animator>().SetTrigger("Relive");
+    }
+
+
+
     public void statusDisplay()
     {
         //Player2側のステータスを更新

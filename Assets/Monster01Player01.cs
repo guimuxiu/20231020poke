@@ -150,7 +150,25 @@ public class Monster01Player01 : MonoBehaviour
     //UŒ‚‚ğ‚·‚é‚½‚ß‚ÌŠÖ”
     public void requestAttack (int number)
     {
-        GetComponent<Animator>().SetTrigger("Attack0" + number);
+  
+        if(number == 01)
+        {
+            GetComponent<Animator>().SetTrigger("Attack01");
+        }
+        else if (number == 02)
+        {
+            GetComponent<Animator>().SetTrigger("Attack02");
+        }
+        else if (number == 03)
+        {
+            GetComponent<Animator>().SetTrigger("Attack03");
+        }
+
+
+
+
+
+
     }
 
 
@@ -158,6 +176,20 @@ public class Monster01Player01 : MonoBehaviour
     {
         GetComponent<Animator>().SetTrigger("Damage");
     }
+
+    public void requestDeath()
+    {
+        GetComponent<Animator>().SetTrigger("Death");
+    }
+
+
+    public void requestRelive()
+    {
+        GetComponent<Animator>().SetTrigger("Relive");
+    }
+
+
+
 
     public void statusDisplay()
     {
