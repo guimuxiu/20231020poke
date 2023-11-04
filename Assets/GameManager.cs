@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 //UI部品
 using UnityEngine.UI;
 
+
+
 public class GameManager : MonoBehaviour
 {
+    #region ◎オブジェクト等の定義
+
     //ステイト番号
     private int stateNumber = 0;
 
@@ -20,6 +26,10 @@ public class GameManager : MonoBehaviour
 
     //UI ステイト番号の表示
     public GameObject UIStateNumber;
+
+    //UI モンスターの表示
+    public GameObject UIplayer01text;
+    public GameObject UIplayer02text;
 
     //UI モンスターHP
     public GameObject Ul01HPtext;
@@ -41,7 +51,7 @@ public class GameManager : MonoBehaviour
     //0=未選択、1=こうげき、2=いれかえ 3=ステータス
     private int choiceCommand01 = 0;
     private int choiceCommand02 = 0;
-   
+
     //プレイヤーの武器選択の結果
     //0=未選択、1=武器1、……
     private int WN01 = 0;
@@ -49,8 +59,8 @@ public class GameManager : MonoBehaviour
 
 
     //モンスターの交替画面
-    public GameObject ChangeMonster01 ;
-    public GameObject ChangeMonster02 ;
+    public GameObject ChangeMonster01;
+    public GameObject ChangeMonster02;
 
 
 
@@ -58,6 +68,11 @@ public class GameManager : MonoBehaviour
     //0=未行動、1=行動済み
     private int ActionCheck01 = 0;
     private int ActionCheck02 = 0;
+
+
+    //残りモンスター数
+    private int MonsterCount01 = 6;
+    private int MonsterCount02 = 6;
 
 
     //技テキスト
@@ -75,32 +90,51 @@ public class GameManager : MonoBehaviour
     public GameObject UIHPnow1;
     public GameObject UIHPnow2;
 
-    //モンスターの見た目
-    public GameObject Rogue0101;
-    public GameObject Rogue0102;
-    public GameObject Rogue0103;
-    public GameObject Rogue0104;
-    public GameObject Rogue0105;
-    public GameObject Rogue0106;
-    public GameObject Rogue0201;
-    public GameObject Rogue0202;
-    public GameObject Rogue0203;
-    public GameObject Rogue0204;
-    public GameObject Rogue0205;
-    public GameObject Rogue0206;
+
+    //現在のモンスターの管理番号
+    private int PL01 = 5;
+    private int PL02 = 6;
 
 
+    //モンスターのプレハブ
+    public GameObject[] PL01prefab = new GameObject[10];
+    public GameObject[] PL02prefab = new GameObject[10];
 
-    // Start is called before the first frame update
+
+    //入れ替えボタン
+    public GameObject[] PL01changeButton = new GameObject[10];
+    public GameObject[] PL02changeButton = new GameObject[10];
+
+    #endregion　◎オブジェクト等の定義
+    #region ◎スタート時に生成するもの
     void Start()
     {
+        //プレイヤー1側の生成(待機)
+        Instantiate(PL01prefab[1]);
+        Instantiate(PL01prefab[2]);
+        Instantiate(PL01prefab[3]);
+        Instantiate(PL01prefab[4]);
+        Instantiate(PL01prefab[6]);
 
-       
+        //プレイヤー1側の生成(5)
+        Instantiate(PL01prefab[PL01]).GetComponent<Monster01Player01>().stateNumber = 0;
+
+        //プレイヤー1側の生成(待機)
+        Instantiate(PL02prefab[1]);
+        Instantiate(PL02prefab[2]);
+        Instantiate(PL02prefab[3]);
+        Instantiate(PL02prefab[4]);
+        Instantiate(PL02prefab[5]);
+
+        //プレイヤー2側の生成(6)
+        Instantiate(PL02prefab[PL02]).GetComponent<Monster01Player02>().stateNumber = 0;
 
 
 
     }
-    // Update is called once per frame
+    #endregion ◎スタート時に生成するもの
+    #region　◎アップデート
+    #region ●初期設定
     void Update()
     {
         //タイマー
@@ -113,21 +147,49 @@ public class GameManager : MonoBehaviour
         //player01,02を定義する
 
         Monster01Player01 player01;
-        player01 = GameObject.Find("Monster01Player01").GetComponent<Monster01Player01>();
+        player01 = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)").GetComponent<Monster01Player01>();
 
         Monster01Player02 player02;
-        player02 = GameObject.Find("Monster01Player02").GetComponent<Monster01Player02>();
+        player02 = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)").GetComponent<Monster01Player02>();
 
 
 
         //ライフバー (マイナスになったら0にする）
         UIHPnow1.GetComponent<RectTransform>().localScale = new Vector3((player01.HPNow / player01.HPMax), 1.0f, 1.0f);
-        if (player01.HPNow <= 0) { UIHPnow1.GetComponent<RectTransform>().localScale = new Vector3(0, 1.0f, 1.0f); ; }
+
+        if ((player01.HPNow / player01.HPMax) <= 0.5f) { UIHPnow1.GetComponent<Image>().color = new Color32(255, 255, 0, 255); ; }
+        if ((player01.HPNow / player01.HPMax) <= 0.2f) { UIHPnow1.GetComponent<Image>().color = new Color32(255, 0, 0, 255); ; }
+        if (player01.HPNow <= 0) { UIHPnow1.GetComponent<Image>().color = new Color32(0, 0, 0, 0); ; }
+
+
         UIHPnow2.GetComponent<RectTransform>().localScale = new Vector3((player02.HPNow / player02.HPMax), 1.0f, 1.0f);
-        if (player02.HPNow <= 0) { UIHPnow2.GetComponent<RectTransform>().localScale = new Vector3(0, 1.0f, 1.0f); ; }
+        if ((player02.HPNow / player02.HPMax) <= 0.5f) { UIHPnow2.GetComponent<Image>().color = new Color32(255, 255, 0, 255); ; }
+        if ((player02.HPNow / player02.HPMax) <= 0.2f) { UIHPnow2.GetComponent<Image>().color = new Color32(255, 0, 0, 255); ; }
+        if (player02.HPNow <= 0) { UIHPnow2.GetComponent<Image>().color = new Color32(0, 0, 0, 0); ; }
+
+
+        if (player01.gender == 0)
+        { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 無性別"; }
+        else if (player01.gender == 1)
+        { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 ♂"; }
+        else if (player01.gender == 2)
+        { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 ♀"; }
+
+        if (player02.gender == 0)
+        { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 無性別"; }
+        else if (player02.gender == 1)
+        { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 ♂"; }
+        else if (player02.gender == 2)
+        { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 ♀"; }
 
 
 
+
+        //public GameObject UIplayer02text;
+
+
+        #endregion ●初期設定ButtonBattlePlayer01()
+        #region　●ステイト0　開始画面
 
 
         //モンスターが登場する演出
@@ -138,14 +200,7 @@ public class GameManager : MonoBehaviour
                 UImessage.GetComponent<Text>().text = "対戦開始";
 
 
-                //HPを元に戻す
-                player01.HPNow = player01.HPMax;
-                player02.HPNow = player02.HPMax;
 
-
-                //HPを表示
-                Ul01HPtext.GetComponent<Text>().text = "HP:" + player01.HPNow + "/" + player01.HPMax;
-                Ul02HPtext.GetComponent<Text>().text = "HP:" + player02.HPNow + "/" + player02.HPMax;
 
                 //タイマーリセット
                 timeCounter = 0.0f;
@@ -155,15 +210,34 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        #endregion　●ステイト0　開始画面
+        #region●ステイト100番台　プレイヤー01の選択画面
         else if (stateNumber == 101)
         {
 
+
+            //HPを表示
+            Ul01HPtext.GetComponent<Text>().text = "HP:" + player01.HPNow + "/" + player01.HPMax;
+            Ul02HPtext.GetComponent<Text>().text = "HP:" + player02.HPNow + "/" + player02.HPMax;
+
+            //ライフバー (マイナスになったら0にする）
+            if ((player01.HPNow / player01.HPMax) > 0.5f) { UIHPnow1.GetComponent<Image>().color = new Color32(0, 255, 0, 255); ; }
+            if ((player01.HPNow / player01.HPMax) <= 0.5f) { UIHPnow1.GetComponent<Image>().color = new Color32(255, 255, 0, 255); ; }
+            if ((player01.HPNow / player01.HPMax) <= 0.2f) { UIHPnow1.GetComponent<Image>().color = new Color32(255, 0, 0, 255); ; }
+            if (player01.HPNow <= 0) { UIHPnow1.GetComponent<Image>().color = new Color32(0, 0, 0, 0); ; }
+
+
+
+            if ((player02.HPNow / player02.HPMax) > 0.5f) { UIHPnow2.GetComponent<Image>().color = new Color32(0, 255, 0, 255); ; }
+            if ((player02.HPNow / player02.HPMax) <= 0.5f) { UIHPnow2.GetComponent<Image>().color = new Color32(255, 255, 0, 255); ; }
+            if ((player02.HPNow / player02.HPMax) <= 0.2f) { UIHPnow2.GetComponent<Image>().color = new Color32(255, 0, 0, 255); ; }
+            if (player02.HPNow <= 0) { UIHPnow2.GetComponent<Image>().color = new Color32(0, 0, 0, 0); ; }
+
+
+
+
             if (timeCounter > 3.0f)
             {
-                //倒れているモンスターを起こす
-
-                player01.requestRelive();
-                player02.requestRelive();
 
 
 
@@ -171,8 +245,7 @@ public class GameManager : MonoBehaviour
                 //未選択
                 choiceCommand01 = 0;
 
-                //コマンドON
-                UIchoice01.SetActive(true);
+                
 
                 //行動確認off
                 ActionCheck01 = 0;
@@ -181,7 +254,8 @@ public class GameManager : MonoBehaviour
                 //
                 UImessage.GetComponent<Text>().text = "行動選択";
 
-
+                //コマンドON
+                UIchoice01.SetActive(true);
 
                 //ステイト変更
                 stateNumber = 102;
@@ -193,6 +267,8 @@ public class GameManager : MonoBehaviour
         //コマンドが選択されるまでの待機
         else if (stateNumber == 102)
         {
+            
+            UIchoice02.SetActive(false);
 
 
             if (choiceCommand01 == 1)
@@ -320,7 +396,137 @@ public class GameManager : MonoBehaviour
 
         else if (stateNumber == 104)
         {
-        
+            Monster01Player01 monster01;
+            monster01 = GameObject.Find("Monster01Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster01.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[1].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[1].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[1].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[1].GetComponent<Button>().enabled = true;
+            }
+
+
+            Monster01Player01 monster02;
+            monster02 = GameObject.Find("Monster02Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster02.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[2].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[2].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[2].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[2].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player01 monster03;
+            monster03 = GameObject.Find("Monster03Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster03.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[3].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[3].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[3].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[3].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player01 monster04;
+            monster04 = GameObject.Find("Monster04Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster04.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[4].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[4].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[4].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[4].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player01 monster05;
+            monster05 = GameObject.Find("Monster05Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster05.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[5].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[5].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[5].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[5].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player01 monster06;
+            monster06 = GameObject.Find("Monster06Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster06.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[6].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[6].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[6].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[6].GetComponent<Button>().enabled = true;
+
+            }
+
+
+
+            //交替したモンスターのUIパネル
+            if (player01.gender == 0)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 無性別"; }
+            else if (player01.gender == 1)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 ♂"; }
+            else if (player01.gender == 2)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 ♀"; }
+
+            if (player02.gender == 0)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 無性別"; }
+            else if (player02.gender == 1)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 ♂"; }
+            else if (player02.gender == 2)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 ♀"; }
+
 
 
         }
@@ -344,12 +550,152 @@ public class GameManager : MonoBehaviour
 
         }
 
+        else if (stateNumber == 106)
+        {
 
 
 
+            ChangeMonster01.SetActive(true);
+
+            Monster01Player01 monster01;
+            monster01 = GameObject.Find("Monster01Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster01.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[1].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[1].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[1].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[1].GetComponent<Button>().enabled = true;
+            }
+
+
+            Monster01Player01 monster02;
+            monster02 = GameObject.Find("Monster02Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster02.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[2].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[2].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[2].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[2].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player01 monster03;
+            monster03 = GameObject.Find("Monster03Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster03.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[3].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[3].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[3].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[3].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player01 monster04;
+            monster04 = GameObject.Find("Monster04Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster04.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[4].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[4].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[4].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[4].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player01 monster05;
+            monster05 = GameObject.Find("Monster05Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster05.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[5].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[5].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[5].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[5].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player01 monster06;
+            monster06 = GameObject.Find("Monster06Player01(Clone)").GetComponent<Monster01Player01>();
+
+            if (monster06.HPNow <= 0)
+            {
+                //赤
+                PL01changeButton[6].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL01changeButton[6].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL01changeButton[6].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL01changeButton[6].GetComponent<Button>().enabled = true;
+
+            }
+
+            if (player01.gender == 0)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 無性別"; }
+            else if (player01.gender == 1)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 ♂"; }
+            else if (player01.gender == 2)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 ♀"; }
+
+            if (player02.gender == 0)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 無性別"; }
+            else if (player02.gender == 1)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 ♂"; }
+            else if (player02.gender == 2)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 ♀"; }
+
+
+        }
+
+
+
+        #endregion●ステイト100番台　プレイヤー01の選択画面
+        #region　●ステイト200番台　プレイヤー02の選択画面
         //行動選択プレイヤー02
         else if (stateNumber == 202)
         {
+
 
             if (choiceCommand02 == 1)
             {
@@ -429,9 +775,141 @@ public class GameManager : MonoBehaviour
             }
         }
 
-
+        //モンスター交替
         else if (stateNumber == 204)
         {
+            Monster01Player02 monster01;
+            monster01 = GameObject.Find("Monster01Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster01.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[1].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[1].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[1].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[1].GetComponent<Button>().enabled = true;
+            }
+
+
+            Monster01Player02 monster02;
+            monster02 = GameObject.Find("Monster02Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster02.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[2].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[2].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[2].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[2].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player02 monster03;
+            monster03 = GameObject.Find("Monster03Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster03.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[3].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[3].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[3].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[3].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player02 monster04;
+            monster04 = GameObject.Find("Monster04Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster04.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[4].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[4].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[4].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[4].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player02 monster05;
+            monster05 = GameObject.Find("Monster05Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster05.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[5].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[5].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[5].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[5].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player02 monster06;
+            monster06 = GameObject.Find("Monster06Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster06.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[6].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[6].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[6].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[6].GetComponent<Button>().enabled = true;
+
+            }
+
+
+
+            //交替したモンスターのUIパネル
+            if (player01.gender == 0)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 無性別"; }
+            else if (player01.gender == 1)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 ♂"; }
+            else if (player01.gender == 2)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 ♀"; }
+
+            if (player02.gender == 0)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 無性別"; }
+            else if (player02.gender == 1)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 ♂"; }
+            else if (player02.gender == 2)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 ♀"; }
+
+
 
 
 
@@ -441,7 +919,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-
+        //ステータス確認
         else if (stateNumber == 205)
         {
             if (Input.GetMouseButtonDown(0))
@@ -458,7 +936,151 @@ public class GameManager : MonoBehaviour
         }
 
 
+        //行動選択プレイヤー02
+        else if (stateNumber == 206)
+        {
+            ChangeMonster02.SetActive(true);
 
+            Monster01Player02 monster01;
+            monster01 = GameObject.Find("Monster01Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster01.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[1].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[1].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[1].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[1].GetComponent<Button>().enabled = true;
+            }
+
+
+            Monster01Player02 monster02;
+            monster02 = GameObject.Find("Monster02Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster02.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[2].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[2].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[2].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[2].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player02 monster03;
+            monster03 = GameObject.Find("Monster03Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster03.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[3].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[3].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[3].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[3].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player02 monster04;
+            monster04 = GameObject.Find("Monster04Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster04.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[4].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[4].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[4].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[4].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player02 monster05;
+            monster05 = GameObject.Find("Monster05Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster05.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[5].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[5].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[5].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[5].GetComponent<Button>().enabled = true;
+
+            }
+
+            Monster01Player02 monster06;
+            monster06 = GameObject.Find("Monster06Player02(Clone)").GetComponent<Monster01Player02>();
+
+            if (monster06.HPNow <= 0)
+            {
+                //赤
+                PL02changeButton[6].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+                //ボタンを押せなくする
+                PL02changeButton[6].GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                //白
+                PL02changeButton[6].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                //ボタンを押せる
+                PL02changeButton[6].GetComponent<Button>().enabled = true;
+
+            }
+
+
+
+            //交替したモンスターのUIパネル
+            if (player01.gender == 0)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 無性別"; }
+            else if (player01.gender == 1)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 ♂"; }
+            else if (player01.gender == 2)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL01.ToString("D2") + "　Lv:50 ♀"; }
+
+            if (player02.gender == 0)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 無性別"; }
+            else if (player02.gender == 1)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 ♂"; }
+            else if (player02.gender == 2)
+            { UIplayer01text.GetComponent<Text>().text = "モンスター" + PL02.ToString("D2") + "　Lv:50 ♀"; }
+
+
+
+
+
+        }
+
+
+        #endregion　●ステイト200番台　プレイヤー02の選択画面
+        #region　●ステイト300番台　対戦中
         //戦闘開始
 
         else if (stateNumber == 301)
@@ -603,6 +1225,24 @@ public class GameManager : MonoBehaviour
                 { Ul02HPtext.GetComponent<Text>().text = "HP:ひんし"; }
 
 
+                //ライフバー (マイナスになったら黒にする）
+                if ((player01.HPNow / player01.HPMax) > 0.5f) { UIHPnow1.GetComponent<Image>().color = new Color32(0, 255, 0, 255); ; }
+                if ((player01.HPNow / player01.HPMax) <= 0.5f) { UIHPnow1.GetComponent<Image>().color = new Color32(255, 255, 0, 255); ; }
+                if ((player01.HPNow / player01.HPMax) <= 0.2f) { UIHPnow1.GetComponent<Image>().color = new Color32(255, 0, 0, 255); ; }
+                if (player01.HPNow <= 0) { UIHPnow1.GetComponent<Image>().color = new Color32(0, 0, 0, 0); ; }
+
+
+
+                if ((player02.HPNow / player02.HPMax) > 0.5f) { UIHPnow2.GetComponent<Image>().color = new Color32(0, 255, 0, 255); ; }
+                if ((player02.HPNow / player02.HPMax) <= 0.5f) { UIHPnow2.GetComponent<Image>().color = new Color32(255, 255, 0, 255); ; }
+                if ((player02.HPNow / player02.HPMax) <= 0.2f) { UIHPnow2.GetComponent<Image>().color = new Color32(255, 0, 0, 255); ; }
+                if (player02.HPNow <= 0) { UIHPnow2.GetComponent<Image>().color = new Color32(0, 0, 0, 0); ; }
+
+
+
+
+
+
 
                 //ステイト変更
 
@@ -610,9 +1250,12 @@ public class GameManager : MonoBehaviour
                 if (player02.HPNow <= 0)
                 {
 
-
                     //プレイヤー02が倒れる
                     player02.requestDeath();
+
+                    //モンスターカウントを-1する
+                    MonsterCount02 -= 1;
+                    Debug.Log("02側の残数" + this.MonsterCount02);
 
                     //ゲームクリア画面
                     stateNumber = 401;
@@ -654,24 +1297,56 @@ public class GameManager : MonoBehaviour
 
                 //行動確認on
                 ActionCheck02 = 1;
-                UImessage.GetComponent<Text>().text = "モンスター06の攻撃！";
+                
 
                 // 攻撃モーション
                 player02.requestAttack(WN02);
 
-                player01.HPNow -= 30;
+
+                //ダメージ計算
+                if (WN02 == 1)
+                {
+                    player01.HPNow -= 30;
+                    UImessage.GetComponent<Text>().text = "プレイヤー02側の攻撃！\n ダメージ 30";
+                }
+
+                else
+                {
+                    player01.HPNow -= 300;
+                    UImessage.GetComponent<Text>().text = "プレイヤー02側の攻撃！\n ダメージ 300";
+                }
 
                 //ダメージモーション
                 player01.requestDamage();
 
 
-                Debug.Log("モンスター05のHP" + player01.HPNow);
+                Debug.Log("モンスターのHP" + player01.HPNow);
 
 
                 //HPを表示する
                 Ul01HPtext.GetComponent<Text>().text = "HP:" + player01.HPNow + "/" + player01.HPMax;
                 if (player01.HPNow <= 0)
                 { Ul01HPtext.GetComponent<Text>().text = "HP:ひんし"; }
+
+
+                //ライフバー (マイナスになったら0にする）
+                UIHPnow1.GetComponent<RectTransform>().localScale = new Vector3((player01.HPNow / player01.HPMax), 1.0f, 1.0f);
+
+                if ((player01.HPNow / player01.HPMax) > 0.5f) { UIHPnow1.GetComponent<Image>().color = new Color32(0, 255, 0, 255); ; }
+                if ((player01.HPNow / player01.HPMax) <= 0.5f) { UIHPnow1.GetComponent<Image>().color = new Color32(255, 255, 0, 255); ; }
+                if ((player01.HPNow / player01.HPMax) <= 0.2f) { UIHPnow1.GetComponent<Image>().color = new Color32(255, 0, 0, 255); ; }
+                if (player01.HPNow <= 0) { UIHPnow1.GetComponent<Image>().color = new Color32(0, 0, 0, 0); ; }
+
+
+                UIHPnow2.GetComponent<RectTransform>().localScale = new Vector3((player02.HPNow / player02.HPMax), 1.0f, 1.0f);
+                if ((player02.HPNow / player02.HPMax) > 0.5f) { UIHPnow2.GetComponent<Image>().color = new Color32(0, 255, 0, 255); ; }
+                if ((player02.HPNow / player02.HPMax) <= 0.5f) { UIHPnow2.GetComponent<Image>().color = new Color32(255, 255, 0, 255); ; }
+                if ((player02.HPNow / player02.HPMax) <= 0.2f) { UIHPnow2.GetComponent<Image>().color = new Color32(255, 0, 0, 255); ; }
+                if (player02.HPNow <= 0) { UIHPnow2.GetComponent<Image>().color = new Color32(0, 0, 0, 0); ; }
+
+
+
+
 
 
 
@@ -681,11 +1356,14 @@ public class GameManager : MonoBehaviour
 
                     timeCounter = 0.0f;
 
-                    Debug.Log("モンスター05は倒れた！");
-                    UImessage.GetComponent<Text>().text = "モンスター05は倒れた！";
+                    Debug.Log("プレイヤー01側のモンスターは倒れた！");
+                    UImessage.GetComponent<Text>().text = "プレイヤー01側のモンスターは倒れた！";
 
+                    //モンスターカウントを-1する
+                    MonsterCount01 -= 1;
+                    Debug.Log("01側の残数" + this.MonsterCount01);
 
-                    //プレイヤー01が倒れる
+                    //モーション：プレイヤー01が倒れる
                     player01.requestDeath();
 
                     //ゲームオーバー画面
@@ -712,10 +1390,15 @@ public class GameManager : MonoBehaviour
 
                     stateNumber = 101;
 
-
                 }
             }
         }
+        #endregion　●対戦中
+        #region　●ステイト400番台　対戦終了処理
+
+
+
+
 
         else if (stateNumber == 401)
         {
@@ -726,14 +1409,68 @@ public class GameManager : MonoBehaviour
             if (timeCounter > 3.0f)
             {
 
-                UImessage.GetComponent<Text>().text = "モンスター06は倒れた！";
+                UImessage.GetComponent<Text>().text = "プレイヤー02側のモンスターは倒れた！";
+                //01側の残数が0のとき404に行く。その他は106に行く
+                if (MonsterCount02 <= 0)
+                {
+                    stateNumber = 403;
+
+                    //タイマーリセット
+                    timeCounter = 0.0f;
+                }
+                else
+                {
+                    stateNumber = 206;
+                }
+
 
             }
 
 
-            if (timeCounter > 5.0f)
+          
+
+
+
+            
+
+
+
+        }
+
+
+        else if (stateNumber == 402)
+        {
+
+            if (timeCounter > 3.0f)
             {
 
+                UImessage.GetComponent<Text>().text = "プレイヤー01側のモンスターは倒れた！";
+
+                //01側の残数が0のとき404に行く。その他は106に行く
+                if (MonsterCount01 <= 0)
+                { 
+                    stateNumber = 404;
+
+                    //タイマーリセット
+                    timeCounter = 0.0f;
+                }
+                else
+                { 
+                    stateNumber = 106; 
+                }
+
+            }
+
+
+
+           
+
+        }
+        else if (stateNumber == 403)
+        {
+
+            if (timeCounter > 3.0f)
+            {
 
                 UImessage.GetComponent<Text>().text = "対戦に勝利した";
 
@@ -748,26 +1485,13 @@ public class GameManager : MonoBehaviour
 
                     stateNumber = 0;
                 }
+
             }
-
-
 
         }
-
-
-        else if (stateNumber == 402)
+        else if (stateNumber == 404)
         {
-
             if (timeCounter > 3.0f)
-            {
-
-                UImessage.GetComponent<Text>().text = "モンスター05は倒れた！";
-
-            }
-
-
-
-            if (timeCounter > 5.0f)
             {
 
 
@@ -787,12 +1511,16 @@ public class GameManager : MonoBehaviour
                 }
 
             }
-
         }
 
 
 
-    }
+
+        }  //ステイト分岐終了
+    #endregion　●ステイト400番台　対戦終了処理
+    #endregion　◎アップデート
+    #region ◎ボタン
+    　　#region ●最初の選択
 
     //コマンド（ボタン）
     public void ButtonBattlePlayer01()
@@ -803,12 +1531,341 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void ButtonChangePlayer01()
+    public void ButtonBattlePlayer02()
     {
-        Debug.Log("ButtonChangePlayer01");
+        Debug.Log("ButtonBattlePlayer02");
+        choiceCommand02 = 1;
+        UIchoice02.SetActive(false);
+    }
+
+
+    #endregion ●最初の選択
+    　　#region●モンスターの交替
+   　　　　　 #region 〇交替画面
+    //プレイヤー01側
+    public void ButtonChangePlayer01()
+    {  
+        Debug.Log("プレイヤー01のモンスターの交替画面");
         choiceCommand01 = 2;
         UIchoice01.SetActive(false);
+
     }
+    //プレイヤー02側
+    public void ButtonChangePlayer02()
+    {
+       //プレイヤー01側の表記と変える？
+        Monster01Player02 monster01;
+        monster01 = GameObject.Find("Monster01Player02(Clone)").GetComponent<Monster01Player02>();
+
+        if (monster01.HPNow <= 0)
+        {
+            //赤
+            PL02changeButton[1].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+            //ボタンを押せなくする
+            PL02changeButton[1].GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            //白
+            PL02changeButton[1].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            //ボタンを押せる
+            PL02changeButton[1].GetComponent<Button>().enabled = true;
+        }
+
+
+        Monster01Player02 monster02;
+        monster02 = GameObject.Find("Monster02Player02(Clone)").GetComponent<Monster01Player02>();
+
+        if (monster02.HPNow <= 0)
+        {
+            //赤
+            PL02changeButton[2].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+            //ボタンを押せなくする
+            PL02changeButton[2].GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            //白
+            PL02changeButton[2].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            //ボタンを押せる
+            PL02changeButton[2].GetComponent<Button>().enabled = true;
+
+        }
+
+        Monster01Player02 monster03;
+        monster03 = GameObject.Find("Monster03Player02(Clone)").GetComponent<Monster01Player02>();
+
+        if (monster03.HPNow <= 0)
+        {
+            //赤
+            PL02changeButton[3].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+            //ボタンを押せなくする
+            PL02changeButton[3].GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            //白
+            PL02changeButton[3].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            //ボタンを押せる
+            PL02changeButton[3].GetComponent<Button>().enabled = true;
+
+        }
+
+        Monster01Player02 monster04;
+        monster04 = GameObject.Find("Monster04Player02(Clone)").GetComponent<Monster01Player02>();
+
+        if (monster04.HPNow <= 0)
+        {
+            //赤
+            PL02changeButton[4].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+            //ボタンを押せなくする
+            PL02changeButton[4].GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            //白
+            PL02changeButton[4].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            //ボタンを押せる
+            PL02changeButton[4].GetComponent<Button>().enabled = true;
+
+        }
+
+        Monster01Player02 monster05;
+        monster05 = GameObject.Find("Monster02Player02(Clone)").GetComponent<Monster01Player02>();
+
+        if (monster05.HPNow <= 0)
+        {
+            //赤
+            PL02changeButton[5].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+            //ボタンを押せなくする
+            PL02changeButton[5].GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            //白
+            PL02changeButton[5].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            //ボタンを押せる
+            PL02changeButton[5].GetComponent<Button>().enabled = true;
+
+        }
+
+        Monster01Player02 monster06;
+        monster06 = GameObject.Find("Monster02Player02(Clone)").GetComponent<Monster01Player02>();
+
+        if (monster06.HPNow <= 0)
+        {
+            //赤
+            PL02changeButton[6].GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+            //ボタンを押せなくする
+            PL02changeButton[6].GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            //白
+            PL02changeButton[6].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            //ボタンを押せる
+            PL02changeButton[6].GetComponent<Button>().enabled = true;
+
+        }
+
+        Debug.Log("プレイヤー02のモンスターの交替画面");
+        choiceCommand02 = 2;
+        UIchoice02.SetActive(false);
+
+    }
+
+
+
+
+    #endregion 〇交替画面
+    　　　　　#region 〇交替ボタン
+    public void BackChangeMonster01()
+    {
+        stateNumber = 101;
+        choiceCommand01 = 0;
+        ChangeMonster01.SetActive(false);
+        UIchoice01.SetActive(true);
+    }
+
+
+    public void BackChangeMonster02()
+    {
+        if (stateNumber == 204)
+        { stateNumber = 202; }
+        else if (stateNumber == 206)
+        { stateNumber = 101; }
+        
+        choiceCommand02 = 0;
+        ChangeMonster02.SetActive(false);
+        UIchoice02.SetActive(true);
+
+
+    }
+
+
+    public void ChangeMonsterTo01()
+    {
+        //プレイヤー01側
+        if (stateNumber == 104 | stateNumber == 106)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objout.transform.position = new Vector3(-10.0f, 0.0f, 0.0f);
+
+            PL01 = 1;
+
+            GameObject objin = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objin.transform.position = new Vector3(-4.5f, 0.0f, 0.0f);
+
+
+        }
+        //プレイヤー02側
+        else if (stateNumber == 204 | stateNumber == 206)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objout.transform.position = new Vector3(10.0f, 0.0f, 0.0f);
+
+            PL02 = 1;
+
+            GameObject objin = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objin.transform.position = new Vector3(4.5f, 0.0f, 0.0f);
+        }
+    }
+
+
+
+    public void ChangeMonsterTo02()
+    {
+        //プレイヤー01側
+        if (stateNumber == 104 | stateNumber == 106)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objout.transform.position = new Vector3(-10.0f, 0.0f, 0.0f);
+
+            PL01 = 2;
+
+            GameObject objin = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objin.transform.position = new Vector3(-4.5f, 0.0f, 0.0f);
+        }
+        //プレイヤー02側
+        else if (stateNumber == 204 | stateNumber == 206)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objout.transform.position = new Vector3(10.0f, 0.0f, 0.0f);
+
+            PL02 = 2;
+
+            GameObject objin = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objin.transform.position = new Vector3(4.5f, 0.0f, 0.0f);
+        }
+    }
+    public void ChangeMonsterTo03()
+    {
+        //プレイヤー01側
+        if (stateNumber == 104 | stateNumber == 106)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objout.transform.position = new Vector3(-10.0f, 0.0f, 0.0f);
+
+            PL01 = 3;
+
+            GameObject objin = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objin.transform.position = new Vector3(-4.5f, 0.0f, 0.0f);
+        }
+        //プレイヤー02側
+        else if (stateNumber == 204 | stateNumber == 206)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objout.transform.position = new Vector3(10.0f, 0.0f, 0.0f);
+
+            PL02 = 3;
+
+            GameObject objin = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objin.transform.position = new Vector3(4.5f, 0.0f, 0.0f);
+        }
+    }
+    public void ChangeMonsterTo04()
+    {
+        //プレイヤー01側
+        if (stateNumber == 104 | stateNumber == 106)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objout.transform.position = new Vector3(-10.0f, 0.0f, 0.0f);
+
+            PL01 = 4;
+
+            GameObject objin = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objin.transform.position = new Vector3(-4.5f, 0.0f, 0.0f);
+        }
+        //プレイヤー02側
+        else if (stateNumber == 204 | stateNumber == 206)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objout.transform.position = new Vector3(10.0f, 0.0f, 0.0f);
+
+            PL02 = 4;
+
+            GameObject objin = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objin.transform.position = new Vector3(4.5f, 0.0f, 0.0f);
+        }
+    }
+    public void ChangeMonsterTo05()
+    {
+        //プレイヤー01側
+        if (stateNumber == 104 | stateNumber == 106)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objout.transform.position = new Vector3(-10.0f, 0.0f, 0.0f);
+
+            PL01 = 5;
+
+            GameObject objin = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objin.transform.position = new Vector3(-4.5f, 0.0f, 0.0f);
+        }
+        //プレイヤー02側
+        else if (stateNumber == 204 | stateNumber == 206)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objout.transform.position = new Vector3(10.0f, 0.0f, 0.0f);
+
+            PL02 = 5;
+
+            GameObject objin = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objin.transform.position = new Vector3(4.5f, 0.0f, 0.0f);
+        }
+    }
+    public void ChangeMonsterTo06()
+    {
+        //プレイヤー01側
+        if (stateNumber == 104 | stateNumber == 106)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objout.transform.position = new Vector3(-10.0f, 0.0f, 0.0f);
+
+            PL01 = 6;
+
+            GameObject objin = GameObject.Find("Monster" + PL01.ToString("D2") + "Player01(Clone)");
+            objin.transform.position = new Vector3(-4.5f, 0.0f, 0.0f);
+        }
+        //プレイヤー02側
+        else if (stateNumber == 204 | stateNumber == 206)
+        {
+            GameObject objout = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objout.transform.position = new Vector3(10.0f, 0.0f, 0.0f);
+
+            PL02 = 6;
+
+            GameObject objin = GameObject.Find("Monster" + PL02.ToString("D2") + "Player02(Clone)");
+            objin.transform.position = new Vector3(4.5f, 0.0f, 0.0f);
+        }
+    }
+
+
+
+
+
+    #endregion 〇交替ボタン
+    #endregion ●モンスターの交替
+             #region●武器選択
 
     public void ButtonStatusPlayer01()
     {
@@ -817,155 +1874,6 @@ public class GameManager : MonoBehaviour
         UIchoice01.SetActive(false);
 
     }
-
-
-    public void BackChangeMonster01()
-    {
-        Debug.Log("戻る");
-
-        stateNumber = 102;
-        choiceCommand01 = 0;
-        ChangeMonster01.SetActive(false);
-        UIchoice01.SetActive(true);
-    }
-
-    public void ChangeMonsterTo01()
-    {
-        if (stateNumber == 104)
-        {
-            Rogue0101.SetActive(true);
-            Rogue0102.SetActive(false);
-            Rogue0103.SetActive(false);
-            Rogue0104.SetActive(false);
-            Rogue0105.SetActive(false);
-            Rogue0106.SetActive(false);
-        }
-        else if (stateNumber == 204)
-        {
-            Rogue0201.SetActive(true);
-            Rogue0202.SetActive(false);
-            Rogue0203.SetActive(false);
-            Rogue0204.SetActive(false);
-            Rogue0205.SetActive(false);
-            Rogue0206.SetActive(false);
-        }
-
-    }
-    public void ChangeMonsterTo02()
-    {
-        if (stateNumber == 104)
-        {
-            Rogue0101.SetActive(false);
-            Rogue0102.SetActive(true);
-            Rogue0103.SetActive(false);
-            Rogue0104.SetActive(false);
-            Rogue0105.SetActive(false);
-            Rogue0106.SetActive(false);
-        }
-        else if (stateNumber == 204)
-        {
-            Rogue0201.SetActive(false);
-            Rogue0202.SetActive(true);
-            Rogue0203.SetActive(false);
-            Rogue0204.SetActive(false);
-            Rogue0205.SetActive(false);
-            Rogue0206.SetActive(false);
-        }
-    }
-    public void ChangeMonsterTo03()
-    {
-        if (stateNumber == 104)
-        {
-            Rogue0101.SetActive(false);
-            Rogue0102.SetActive(false);
-            Rogue0103.SetActive(true);
-            Rogue0104.SetActive(false);
-            Rogue0105.SetActive(false);
-            Rogue0106.SetActive(false);
-        }
-        else if (stateNumber == 204)
-        {
-            Rogue0201.SetActive(false);
-            Rogue0202.SetActive(false);
-            Rogue0203.SetActive(true);
-            Rogue0204.SetActive(false);
-            Rogue0205.SetActive(false);
-            Rogue0206.SetActive(false);
-        }
-
-    }
-
-        public void ChangeMonsterTo04()
-    {
-        if (stateNumber == 104)
-        {
-            Rogue0101.SetActive(false);
-            Rogue0102.SetActive(false);
-            Rogue0103.SetActive(false);
-            Rogue0104.SetActive(true);
-            Rogue0105.SetActive(false);
-            Rogue0106.SetActive(false);
-        }
-        else if (stateNumber == 204)
-        {
-            Rogue0201.SetActive(false);
-            Rogue0202.SetActive(false);
-            Rogue0203.SetActive(false);
-            Rogue0204.SetActive(true);
-            Rogue0205.SetActive(false);
-            Rogue0206.SetActive(false);
-        }
-
-    }
-    public void ChangeMonsterTo05()
-    {
-        if (stateNumber == 104)
-        {
-            Rogue0101.SetActive(false);
-            Rogue0102.SetActive(false);
-            Rogue0103.SetActive(false);
-            Rogue0104.SetActive(false);
-            Rogue0105.SetActive(true);
-            Rogue0106.SetActive(false);
-        }
-        else if (stateNumber == 204)
-        {
-            Rogue0201.SetActive(false);
-            Rogue0202.SetActive(false);
-            Rogue0203.SetActive(false);
-            Rogue0204.SetActive(false);
-            Rogue0205.SetActive(true);
-            Rogue0206.SetActive(false);
-        }
-    }
-
-    public void ChangeMonsterTo06()
-    {
-        if (stateNumber == 104)
-        {
-            Rogue0101.SetActive(false);
-            Rogue0102.SetActive(false);
-            Rogue0103.SetActive(false);
-            Rogue0104.SetActive(false);
-            Rogue0105.SetActive(false);
-            Rogue0106.SetActive(true);
-        }
-
-        else if (stateNumber == 204)
-        {
-            Rogue0201.SetActive(false);
-            Rogue0202.SetActive(false);
-            Rogue0203.SetActive(false);
-            Rogue0204.SetActive(false);
-            Rogue0205.SetActive(false);
-            Rogue0206.SetActive(true);
-        }
-
-
-    }
-
-
-
 
     public void Weapon01Player01()
     {
@@ -1001,19 +1909,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ButtonBattlePlayer02()
-    {
-        Debug.Log("ButtonBattlePlayer02");
-        choiceCommand02 = 1;
-        UIchoice02.SetActive(false);
-    }
-
-    public void ButtonChangePlayer02()
-    {
-        Debug.Log("ButtonChangePlayer02");
-        choiceCommand02 = 2;
-        UIchoice02.SetActive(false);
-    }
 
     public void ButtonStatusPlayer02()
     {
@@ -1022,21 +1917,6 @@ public class GameManager : MonoBehaviour
         UIchoice02.SetActive(false);
 
     }
-
-    public void BackChangeMonster02()
-    {
-        Debug.Log("戻る");
-
-        
-        ChangeMonster02.SetActive(false);
-        UIchoice02.SetActive(true);
-        choiceCommand02 = 0;
-        stateNumber = 202;
-    }
-
-
-
-
 
     public void Weapon01Player02()
     {
@@ -1070,15 +1950,21 @@ public class GameManager : MonoBehaviour
         choiceCommand02 = 0;
 
     }
+    #endregion●武器選択
+    #endregion ◎ボタン
+    #region ◎ダメージ計算
+             #region ●最初の設定
 
+    //プレイヤー01　→　02
     void PlayerAttack01()
     {
+       
 
         Monster01Player01 player01;
-        player01 = GameObject.Find("Monster01Player01").GetComponent<Monster01Player01>();
+        player01 = GameObject.Find("Monster"+PL01.ToString("D2")+ "Player01(Clone)").GetComponent<Monster01Player01>();
 
         Monster01Player02 player02;
-        player02 = GameObject.Find("Monster01Player02").GetComponent<Monster01Player02>();
+        player02 = GameObject.Find("Monster"+PL02.ToString("D2")+ "Player02(Clone)").GetComponent<Monster01Player02>();
 
 
 
@@ -1090,8 +1976,8 @@ public class GameManager : MonoBehaviour
         int[] wf9003 = { 3, 80, 100, 10, 2, 0 };
         int[] wf9004 = { 4, 0, 100, 10, 3, 0 };
 
-
-
+        #endregion ●最初の設定
+             #region●基礎威力
 
 
         //01→02のダメージ計算
@@ -1210,7 +2096,8 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("攻撃or特攻の実数値" + da02);
         Debug.Log("特攻or特防の実数値" + da03);
-
+        #endregion●基礎威力
+             #region●ランク補正
         //攻撃側ランク補正
         float da201 = 1;
 
@@ -1335,17 +2222,12 @@ public class GameManager : MonoBehaviour
             da03R = 1;
 
         }
-
-
-
-
         //最終威力=基礎威力×威力補正/4096
-
-
         float da04 = Mathf.Floor(Mathf.Floor(da01 * WeaponPower * da02 * da02R / (da03 * da03R)) / 50 + 2);
 
         Debug.Log("かっこ内の計算値" + da04);
-
+        #endregion  ●ランク補正
+             #region ●範囲補正　親子愛補正　天気補正
         //範囲補正計算
 
         float da05 = da04;
@@ -1357,7 +2239,8 @@ public class GameManager : MonoBehaviour
         //天気補正
 
         float da07 = da06;
-
+        #endregion ●範囲補正　親子愛補正　天気補正
+             #region●急所補正　乱数補正
         //急所補正
         //自分の下降ランクと相手の上昇ランク無視はどうしよう？
 
@@ -1401,7 +2284,8 @@ public class GameManager : MonoBehaviour
         //                  Mathf.Floor(daR01[4]),Mathf.Floor(daR01[5]),Mathf.Floor(daR01[6]),Mathf.Floor(daR01[7]),
         //                  Mathf.Floor(daR01[8]),Mathf.Floor(daR01[9]),Mathf.Floor(daR01[10]),Mathf.Floor(daR01[11])};
 
-
+        #endregion●急所補正　乱数補正
+             #region ●タイプ補正
 
         float da13 = 0;     //技タイプ
 
@@ -2263,7 +3147,8 @@ public class GameManager : MonoBehaviour
         float da17 = Mathf.Floor(da12 * da16);
         Debug.Log("相性判定後" + da17);
 
-
+        #endregion ●タイプ補正
+             #region ●火傷　M補正
         //やけど判定
         float da18 = da17;
 
@@ -2279,15 +3164,15 @@ public class GameManager : MonoBehaviour
         float da20 = da19;
 
         Debug.Log("最終ダメージ関数値" + da20);
-
-
+        #endregion ●火傷　M補正
+             #region ●最終ダメージ計算
         //最終ダメージ計算
 
         player02.HPNow -= da20;
 
         player02.statusDisplay();
 
-        Debug.Log("モンスター06のHP" + player02.HPNow + "/" + player02.HPMax);
+        Debug.Log("プレイヤー02のモンスターのHP" + player02.HPNow + "/" + player02.HPMax);
 
 
         string WNlog = "";
@@ -2298,20 +3183,16 @@ public class GameManager : MonoBehaviour
         else if (WN01 == 4) { WNlog = "きあい"; }
 
 
-
         UImessage.GetComponent<Text>().text =
-        "モンスター05の攻撃！  " + WNlog + "!! \n" +
+        "プレイヤー01のモンスターの攻撃！  " + WNlog + "!! \n" +
         "急所乱数" + da08r + "/24 \n " +
         "乱数補正" + da10 + "% \n" +
         "タイプ相性" + da16 + "倍 \n" +
         "ダメージ" + da20;
 
 
-
-
-    }
-
-
-
-
+    } 
+        //ダメージ計算式
+    #endregion ●最終ダメージ計算
+    #endregion ◎ダメージ計算
 }

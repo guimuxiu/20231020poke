@@ -6,11 +6,14 @@ public class Monster01Player02 : MonoBehaviour
 {
 
     //状態番号
-    private int stateNumber = 0;
+    public int stateNumber = -1;
 
     //汎用タイマー
     private float timeCounter = 0.0f;
 
+
+    //モンスター名前
+    public string Name = "未定義";
 
     public int MonNommber = 9999;  //モンスターの図鑑ナンバー
     public int Monform = 006;       //モンスターのフォルムナンバー
