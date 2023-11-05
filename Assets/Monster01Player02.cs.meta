@@ -3,7 +3,12 @@ guid: ebc1e288cbd424d418e9c0e2df58324a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - SEattack01: {fileID: 8300000, guid: 5cb0ce29677a99e4cbc8f432cf041751, type: 3}
+  - SEattack02: {fileID: 8300000, guid: d0905b98f468f984ea7612a74c2d824a, type: 3}
+  - SEattack03: {fileID: 8300000, guid: 63aea8a9d06340a43b69cf36839fcc47, type: 3}
+  - SEattack04: {fileID: 8300000, guid: 8a2c2a17aafce604c9082a5e34d65168, type: 3}
+  - SEDEath: {fileID: 8300000, guid: dad3341b76d1b984b993b50dc4fd44f2, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

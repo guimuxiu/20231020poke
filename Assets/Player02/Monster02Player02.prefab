@@ -447,6 +447,8 @@ GameObject:
   - component: {fileID: 5061982436928213347}
   - component: {fileID: 5143235880113651337}
   - component: {fileID: 3274526835314181152}
+  - component: {fileID: -6592838748521050147}
+  - component: {fileID: -965256304951103516}
   m_Layer: 0
   m_Name: Monster02Player02
   m_TagString: Untagged
@@ -504,7 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateNumber: -1
-  name: "\u30E2\u30F3\u30B9\u30BF\u30FC02"
+  Name: "\u672A\u5B9A\u7FA9"
   MonNommber: 9999
   Monform: 6
   gender: 1
@@ -543,6 +545,164 @@ MonoBehaviour:
   CtRa: 0
   DtRa: 0
   StRa: 0
+  SEattack01: {fileID: 8300000, guid: 5cb0ce29677a99e4cbc8f432cf041751, type: 3}
+  SEattack02: {fileID: 8300000, guid: d0905b98f468f984ea7612a74c2d824a, type: 3}
+  SEattack03: {fileID: 8300000, guid: 63aea8a9d06340a43b69cf36839fcc47, type: 3}
+  SEattack04: {fileID: 8300000, guid: 8a2c2a17aafce604c9082a5e34d65168, type: 3}
+  SEDEath: {fileID: 8300000, guid: dad3341b76d1b984b993b50dc4fd44f2, type: 3}
+--- !u!82 &-6592838748521050147
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5058244180450931579}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &-965256304951103516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5058244180450931579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebc1e288cbd424d418e9c0e2df58324a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateNumber: -1
+  Name: "\u672A\u5B9A\u7FA9"
+  MonNommber: 9999
+  Monform: 6
+  gender: 1
+  type: 040000000500000000000000
+  teratype: 6
+  nature:
+  - 0
+  - 0.9
+  - 1.1
+  - 1
+  - 1
+  - 1
+  ability: 2
+  item: 2
+  Level: 50
+  MonBaV: 64000000140000003c00000032000000280000001e000000
+  MonInV: 1f0000001f0000001f0000001f0000001f0000001f000000
+  MonEfV: fc00000000000000fc000000000000000000000004000000
+  MonRealV:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  WeaponSet: 00000000292300002a2300002b2300002c230000
+  HPMax: 0
+  HPNow: 0
+  AtRl: 0
+  BtRl: 0
+  CtRl: 0
+  DtRl: 0
+  StRl: 0
+  AtRa: 0
+  BtRa: 0
+  CtRa: 0
+  DtRa: 0
+  StRa: 0
+  SEattack01: {fileID: 8300000, guid: 5cb0ce29677a99e4cbc8f432cf041751, type: 3}
+  SEattack02: {fileID: 8300000, guid: d0905b98f468f984ea7612a74c2d824a, type: 3}
+  SEattack03: {fileID: 8300000, guid: 63aea8a9d06340a43b69cf36839fcc47, type: 3}
+  SEattack04: {fileID: 8300000, guid: 8a2c2a17aafce604c9082a5e34d65168, type: 3}
+  SEDEath: {fileID: 8300000, guid: dad3341b76d1b984b993b50dc4fd44f2, type: 3}
 --- !u!1 &5058244180536946937
 GameObject:
   m_ObjectHideFlags: 0

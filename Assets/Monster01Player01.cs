@@ -55,8 +55,12 @@ public class Monster01Player01 : MonoBehaviour
     //public int HPNow = 0;
     //public int At = 10;
 
-
-
+    //Œø‰Ê‰¹
+    public AudioClip SEattack01;
+    public AudioClip SEattack02;
+    public AudioClip SEattack03;
+    public AudioClip SEattack04;
+    public AudioClip SEDeath;
 
     // Start is called before the first frame update
     void Start()
@@ -157,17 +161,24 @@ public class Monster01Player01 : MonoBehaviour
   
         if(number == 01)
         {
+            GetComponent<AudioSource>().PlayOneShot(SEattack01);
             GetComponent<Animator>().SetTrigger("Attack01");
         }
         else if (number == 02)
         {
+            GetComponent<AudioSource>().PlayOneShot(SEattack02);
             GetComponent<Animator>().SetTrigger("Attack02");
         }
         else if (number == 03)
         {
+            GetComponent<AudioSource>().PlayOneShot(SEattack03);
             GetComponent<Animator>().SetTrigger("Attack03");
         }
-
+        else if (number == 04)
+        {
+            GetComponent<AudioSource>().PlayOneShot(SEattack03);
+            GetComponent<Animator>().SetTrigger("Attack03");
+        }
 
 
 
@@ -183,6 +194,7 @@ public class Monster01Player01 : MonoBehaviour
 
     public void requestDeath()
     {
+        GetComponent<AudioSource>().PlayOneShot(SEDeath);
         GetComponent<Animator>().SetTrigger("Death");
     }
 
