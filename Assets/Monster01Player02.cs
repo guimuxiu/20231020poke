@@ -141,10 +141,7 @@ public class Monster01Player02 : MonoBehaviour
                 stateNumber = 1;
             }
 
-
         }
-
-
 
     }
     public void requestAttack(int number)
